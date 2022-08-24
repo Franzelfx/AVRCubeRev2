@@ -1,0 +1,110 @@
+
+.vscode/avr.build/output.elf:     file format elf32-avr
+
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+__vectors():
+   0:	10 c0       	rjmp	.+32     	; 0x22 <__ctors_end>
+   2:	17 c0       	rjmp	.+46     	; 0x32 <__bad_interrupt>
+   4:	16 c0       	rjmp	.+44     	; 0x32 <__bad_interrupt>
+   6:	15 c0       	rjmp	.+42     	; 0x32 <__bad_interrupt>
+   8:	14 c0       	rjmp	.+40     	; 0x32 <__bad_interrupt>
+   a:	13 c0       	rjmp	.+38     	; 0x32 <__bad_interrupt>
+   c:	12 c0       	rjmp	.+36     	; 0x32 <__bad_interrupt>
+   e:	11 c0       	rjmp	.+34     	; 0x32 <__bad_interrupt>
+  10:	10 c0       	rjmp	.+32     	; 0x32 <__bad_interrupt>
+  12:	0f c0       	rjmp	.+30     	; 0x32 <__bad_interrupt>
+  14:	0e c0       	rjmp	.+28     	; 0x32 <__bad_interrupt>
+  16:	0d c0       	rjmp	.+26     	; 0x32 <__bad_interrupt>
+  18:	0c c0       	rjmp	.+24     	; 0x32 <__bad_interrupt>
+  1a:	0b c0       	rjmp	.+22     	; 0x32 <__bad_interrupt>
+  1c:	0a c0       	rjmp	.+20     	; 0x32 <__bad_interrupt>
+  1e:	09 c0       	rjmp	.+18     	; 0x32 <__bad_interrupt>
+  20:	08 c0       	rjmp	.+16     	; 0x32 <__bad_interrupt>
+
+00000022 <__ctors_end>:
+__trampolines_start():
+  22:	11 24       	eor	r1, r1
+  24:	1f be       	out	0x3f, r1	; 63
+  26:	cf e5       	ldi	r28, 0x5F	; 95
+  28:	d2 e0       	ldi	r29, 0x02	; 2
+  2a:	de bf       	out	0x3e, r29	; 62
+  2c:	cd bf       	out	0x3d, r28	; 61
+  2e:	02 d0       	rcall	.+4      	; 0x34 <main>
+  30:	19 c0       	rjmp	.+50     	; 0x64 <_exit>
+
+00000032 <__bad_interrupt>:
+__vector_1():
+  32:	e6 cf       	rjmp	.-52     	; 0x0 <__vectors>
+
+00000034 <main>:
+main():
+/Users/FabianFranz/Development/Projects/AVRCubeRev3/main.c:39
+    
+}
+
+void allLedOn(void)
+{
+    PORTA |= (1 << LED1) | (1 << LED2) | (1 << LED3) | (1 << LED4) | (1 << LED5);
+  34:	8b b3       	in	r24, 0x1b	; 27
+  36:	80 6a       	ori	r24, 0xA0	; 160
+  38:	8b bb       	out	0x1b, r24	; 27
+/Users/FabianFranz/Development/Projects/AVRCubeRev3/main.c:40
+    PORTB |= (1 << LED6) | (1 << LED7);
+  3a:	88 b3       	in	r24, 0x18	; 24
+  3c:	8a 60       	ori	r24, 0x0A	; 10
+  3e:	88 bb       	out	0x18, r24	; 24
+_delay_ms():
+/Users/FabianFranz/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay.h:187
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  40:	2f ef       	ldi	r18, 0xFF	; 255
+  42:	83 ed       	ldi	r24, 0xD3	; 211
+  44:	90 e3       	ldi	r25, 0x30	; 48
+  46:	21 50       	subi	r18, 0x01	; 1
+  48:	80 40       	sbci	r24, 0x00	; 0
+  4a:	90 40       	sbci	r25, 0x00	; 0
+  4c:	e1 f7       	brne	.-8      	; 0x46 <__SREG__+0x7>
+  4e:	00 c0       	rjmp	.+0      	; 0x50 <__SREG__+0x11>
+  50:	00 00       	nop
+allLedOff():
+/Users/FabianFranz/Development/Projects/AVRCubeRev3/main.c:44
+}
+void allLedOff(void)
+{
+    PORTA &= ~((1 << LED1) | (1 << LED2) | (1 << LED3) | (1 << LED4) | (1 << LED5));
+  52:	8b b3       	in	r24, 0x1b	; 27
+  54:	8f 75       	andi	r24, 0x5F	; 95
+  56:	8b bb       	out	0x1b, r24	; 27
+/Users/FabianFranz/Development/Projects/AVRCubeRev3/main.c:45
+    PORTB &= ~((1 << LED6) | (1 << LED7));
+  58:	88 b3       	in	r24, 0x18	; 24
+  5a:	85 7f       	andi	r24, 0xF5	; 245
+  5c:	88 bb       	out	0x18, r24	; 24
+main():
+/Users/FabianFranz/Development/Projects/AVRCubeRev3/main.c:29
+{
+    allLedOn();
+    _delay_ms(2000);
+    allLedOff();
+    return 0;
+}
+  5e:	90 e0       	ldi	r25, 0x00	; 0
+  60:	80 e0       	ldi	r24, 0x00	; 0
+  62:	08 95       	ret
+
+00000064 <_exit>:
+exit():
+/Users/jenkins/jenkins/workspace/avr-gcc-staging/label/mac-mini/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2278
+  64:	f8 94       	cli
+
+00000066 <__stop_program>:
+__stop_program():
+/Users/jenkins/jenkins/workspace/avr-gcc-staging/label/mac-mini/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2280
+  66:	ff cf       	rjmp	.-2      	; 0x66 <__stop_program>

@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../AVRCubeRev2/Code/AVRCubeRev2"
+		}
+	],
+	"settings": {
+		"editor.semanticTokenColorCustomizations": {
+			"rules": {
+				"*.deprecated": {
+					"foreground": "#808080",
+					"italic": true
+				}
+			}
+		}
+	}
+}
