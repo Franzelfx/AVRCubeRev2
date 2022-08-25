@@ -1,1 +1,5 @@
+Attiny24:
 avrdude -p t24 -c avrisp -b 19200 -P /dev/cu.usbserial-1410 -U /Users/FabianFranz/Development/Projects/AVRCubeRev2/AvrCubeV2Code/.pio/build/attiny24/firmware.hex -U lfuse:w:0xe2:m -U hfuse:w:0xdf:m -U efuse:w:0xff:m
+
+Attiny84:
+avrdude -p t84 -c avrisp -b 19200 -P /dev/cu.usbserial-1410 -U /Users/FabianFranz/Development/Projects/AVRCubeRev2/AvrCubeV2Code/.pio/build/attiny84/firmware.hex -U lfuse:w:0xe2:m -U hfuse:w:0xdf:m -U efuse:w:0xff:m
