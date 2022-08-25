@@ -49,6 +49,8 @@
 #define MMA8653FC_ADDR_WRITE 0x3A
 // Defines for Acceleration Sensor Registers
 #define MMA8653FC_WHO_AM_I 0x0D
+#define MMA8653FC_XYZ_DATA_CFG 0x0E
+#define MMA8653FC_CTRL_REG1 0x2A
 #define MMA8653FC_OUT_X_MSB 0x01
 #define MMA8653FC_OUT_X_LSB 0x02
 #define MMA8653FC_OUT_Y_MSB 0x03
@@ -60,7 +62,7 @@
 #define Z_AXIS MMA8653FC_OUT_Z_MSB
 
 // Global variable for interrupt.
-volatile uint16_t counter = 0;
+volatile uint8_t counter = 0;
 volatile uint8_t button_pressed = 0;
 
 // ---------------------------------------------------------------- //
@@ -193,7 +195,6 @@ void showCross() {
 }
 void showHook() {
   allLedOff();
-  PORTA |= (1 << D1);
   PORTA |= (1 << D2);
   PORTA |= (1 << D3);
   PORTA |= (1 << D4);
@@ -308,31 +309,40 @@ void testI2C_read() {
     showCross();
   }
 }
-uint16_t getAcceleration(uint8_t axis) {
-  uint8_t msb = readRegister(axis);
-  uint8_t lsb = readRegister(axis + 1);
-  uint16_t value = (msb << 8) | lsb;
-  return value;
+void MMA8653FC_init() {
+  writeRegister(MMA8653FC_XYZ_DATA_CFG, 0x00); // 2g range
+  writeRegister(MMA8653FC_CTRL_REG1, 0x03); // Active and fast read mode
 }
-uint16_t getAbs() {
-  uint16_t x = getAcceleration(X_AXIS);
-  uint16_t y = getAcceleration(Y_AXIS);
-  uint16_t z = getAcceleration(Z_AXIS);
-  uint16_t abs = sqrt(x * x + y * y + z * z);
+void getAcceleration(uint8_t* x, uint8_t* y, uint8_t* z) {
+  *x = readRegister(MMA8653FC_OUT_X_MSB);
+  _delay_us(I2C_DELAY);
+  *y = readRegister(MMA8653FC_OUT_Y_MSB);
+  _delay_us(I2C_DELAY);
+  *z = readRegister(MMA8653FC_OUT_Z_MSB);
+  _delay_us(I2C_DELAY);
+}
+uint8_t getAbs(uint8_t x_offset, uint8_t y_offset, uint8_t z_offset) {
+  uint8_t x, y, z;
+  getAcceleration(&x, &y, &z);
+  x = (x - x_offset);
+  y = (y - y_offset);
+  z = (z - z_offset);
+  uint8_t abs = sqrt(x * x + y * y + z * z);
   return abs;
 }
 
 // Calibration sequence after wakeup
-void calibrate() {
-  uint16_t x_offset = 0;
-  uint16_t y_offset = 0;
-  uint16_t z_offset = 0;
+void calibrate(uint8_t* x_offset, uint8_t* y_offset, uint8_t* z_offset) {
   allLedOn();
+  _delay_ms(1000);
+  allLedOff();
   _delay_ms(1000);
   testI2C_read();
   _delay_ms(1000);
   allLedOff();
+  getAcceleration(x_offset, y_offset, z_offset);
   _delay_ms(1000);
+  button_pressed++; // causing jump in the loop
 }
 
 
@@ -341,8 +351,11 @@ void calibrate() {
 // ---------------------------------------------------------------- //
 int main()
 {
+  uint8_t x, y, z;
+  uint8_t x_offset, y_offset, z_offset;
   // Main loop.
   init();
+  MMA8653FC_init();
   // When battery is put in for the first time, buttton is not pressed.
   // But we want to do the calibration sequence, so we set button_pressed to "1".
   if (button_pressed == 0) button_pressed = 1;
@@ -350,12 +363,21 @@ int main()
   {
     // Right after wakeup, the button is pressed once, so we do the calibration sequence.
     if (button_pressed == 1) {
-      calibrate();
+      calibrate(&x_offset, &y_offset, &z_offset);
     }
     else {
       if (button_pressed % 2) {
-        testLeds();
-      }else{
+        getAcceleration(&x, &y, &z);
+        if ((x - x_offset) > 10) {
+          showHook();
+        }
+        else {
+          showCross();
+        }
+        _delay_us(I2C_DELAY);
+      }
+      else {
+        sei();
         allLedOn();
         _delay_ms(1000);
         allLedOff();
