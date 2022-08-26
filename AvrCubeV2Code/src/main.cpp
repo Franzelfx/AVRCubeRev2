@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stdlib.h>
 #include <avr/io.h>
 #include <avr/sleep.h>
@@ -37,12 +38,15 @@
 
 // Defines for control flow
 #define SLEEP_THRESHOLD 60000 // Seconds until the device go to sleep if no action occurs
-#define ACCELERATION_THRESHOLD 20 // The threshold for the absolute motion value in LSB registers
+#define ACCELERATION_THRESHOLD 100 // The threshold for the absolute motion value in LSB registers
 #define DICE_STEPS_FIRST_ROUND 5 // The number of steps the dice has to roll
 #define DICE_STEPS_SECOND_ROUND 5 // The number of steps the dice has to roll
 #define DICE_TIME_STEPS 100 // The time step between dice rolls in ms
 #define DICE_TIME_STEPS_INCREASE 10 // The time step increase between dice rolls in ms in secon round
-#define ANGLETHRESHOLD 1 // The threshold for the angle in degrees
+#define ANGLETHRESHOLD 5 // The threshold for the angle in degrees
+#define CALIBRATION_STEP_DELAY 1000 // The delay between calibration steps in ms
+#define OFFSET_CALIBRATION_STEPS 10 // The number of calibration steps
+#define OFFSET_CALIBRATION_STEP_DELAY 10 // The delay between offset calibration steps in ms
 
 // Defines for I2C
 #define I2C_DELAY 10 // 10 us -> 100 kHz
@@ -58,6 +62,7 @@
 #define MMA8653FC_WHO_AM_I 0x0D
 #define MMA8653FC_XYZ_DATA_CFG 0x0E
 #define MMA8653FC_CTRL_REG1 0x2A
+#define MMA8653FC_SYSMOD 0x0B
 #define MMA8653FC_OUT_X_MSB 0x01
 #define MMA8653FC_OUT_X_LSB 0x02
 #define MMA8653FC_OUT_Y_MSB 0x03
@@ -72,7 +77,7 @@
 volatile uint16_t counter = 0; // Counter for the sleep timer -> max = 65.535
 volatile uint8_t button_pressed = 0;
 // Global variables for sensor offset
-int8_t x_offset, y_offset, z_offset;
+int16_t x_offset, y_offset, z_offset;
 // #TODO write offset value in sensor registers
 
 // ---------------------------------------------------------------- //
@@ -217,12 +222,6 @@ void testLeds() {
     _delay_ms(1000);
   }
 }
-void goToSleep() {
-  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
-  deInit();
-  _delay_ms(10);
-  sleep_mode();
-}
 // I2C BitBang Functions
 void start() {
   setSDA(ON);  // Set SDA high.
@@ -295,6 +294,7 @@ uint8_t readRegister(uint8_t reg) {
   uint8_t value = rx(false);
   stop();
   sei();
+  _delay_us(5 * I2C_DELAY);
   return value;
 }
 void writeRegister(uint8_t reg, uint8_t value) {
@@ -321,35 +321,37 @@ void testI2C_read() {
 }
 void MMA8653FC_init() {
   writeRegister(MMA8653FC_XYZ_DATA_CFG, 0x00); // 2g range
-  writeRegister(MMA8653FC_CTRL_REG1, 0x03); // Active and fast read mode
+  writeRegister(MMA8653FC_CTRL_REG1, 0x01); // Active and fast read mode
 }
 void MMA8653FC_deInit() {
   writeRegister(MMA8653FC_CTRL_REG1, 0x00); // Standby mode
 }
-void getAcceleration(int8_t* x, int8_t* y, int8_t* z) {
-  *x = (int8_t)readRegister(MMA8653FC_OUT_X_MSB);
-  _delay_us(I2C_DELAY);
-  *y = (int8_t)readRegister(MMA8653FC_OUT_Y_MSB);
-  _delay_us(I2C_DELAY);
-  *z = (int8_t)readRegister(MMA8653FC_OUT_Z_MSB);
-  _delay_us(I2C_DELAY);
+void getAcceleration(int16_t* x, int16_t* y, int16_t* z) {
+  int16_t x_msb = 0, x_lsb = 0, y_msb = 0, y_lsb = 0, z_msb = 0, z_lsb = 0;
+  x_msb = readRegister(MMA8653FC_OUT_X_MSB);
+  x_lsb = readRegister(MMA8653FC_OUT_X_LSB);
+  y_msb = readRegister(MMA8653FC_OUT_Y_MSB);
+  y_lsb = readRegister(MMA8653FC_OUT_Y_LSB);
+  z_msb = readRegister(MMA8653FC_OUT_Z_MSB);
+  z_lsb = readRegister(MMA8653FC_OUT_Z_LSB);
+  *x = x_msb << 8 | x_lsb;
+  *y = y_msb << 8 | y_lsb;
+  *z = z_msb << 8 | z_lsb;
 }
 // Data processing and display
-float getVectorAbs(int8_t x, int8_t y, int8_t z) {
-  x = (float)x;
-  y = (float)y;
-  z = (float)z;
-  float abs = (float)sqrt(x * x + y * y + z * z);
-  return abs;
-}
 bool motionDetected() {
-  int8_t x, y, z;
-  getAcceleration(&x, &y, &z);
-  float abs = getVectorAbs(x - x_offset, y - y_offset, z - z_offset);
-  if (abs > ACCELERATION_THRESHOLD) {
+  int8_t abs;
+  int8_t x, y;
+  // Get acceleration with unmasked sign bit
+  x = readRegister(MMA8653FC_OUT_X_MSB);
+  y = readRegister(MMA8653FC_OUT_Y_MSB);
+  x -= x_offset;
+  y -= y_offset;
+  abs = sqrt((float)(x * x + y * y));
+  if(abs > ACCELERATION_THRESHOLD){
     return true;
   }
-  else {
+  else{
     return false;
   }
 }
@@ -380,24 +382,26 @@ void dice() {
   }
 }
 float getAngle(float axis, float gierAxis) {
-  return (atan(axis / gierAxis) * 255) / 71; // (radians * 4068) / 71
+    return (atan(axis / gierAxis) * 4068) / 71; // (radians * 4068) / 71
 }
 void spritLevel() {
-  int8_t x, y, z;
+  int16_t x, y, z;
   float roll, nick;
   // First we get raw data from the accelerometer
   getAcceleration(&x, &y, &z);
-  // Then we substrac the offset from the raw data
-  x -= x_offset;
-  y -= y_offset;
-  z -= z_offset;
+  // Then we substract the offset from the x and y axis, 
+  // to get better relative measurements (full calibration is not implemented)
+  x = (x - x_offset);
+  y = (y - y_offset);
+  if(z == 0)z = 1; // Avoid division by zero
+  z = -abs(z); // Sensor is mounted upside down -> abs cause of tilt > 90°
   // The next step is to calculate the angle of the roll and nick
-  roll = getAngle(x, z);
-  nick = getAngle(y, z);
+  roll = getAngle((float)x, (float)z);
+  nick = getAngle((float)y, (float)z);
   // Now we display the anles with the LED'S
   allLedOff();
   // check if the device is balanced
-  if (abs(z) < ANGLETHRESHOLD) {
+  if (abs(nick) < ANGLETHRESHOLD && abs(roll) < ANGLETHRESHOLD) {
     PORTA |= (1 << D4);
   }
   // If it's not balanced, we check if we nick or gier
@@ -408,38 +412,53 @@ void spritLevel() {
       {
         if (abs(nick) < ANGLETHRESHOLD)
         {
-          PORTA |= (1 << D2);
-          PORTA |= (1 << D5);
-          PORTA |= (1 << D7);
+          PORTA |= (1 << D1);
+          PORTA |= (1 << D3);
+          PORTA |= (1 << D6);
         }
         else
         {
           if (nick < 0)
-            PORTB |= (1 << D7);
+            PORTA |= (1 << D1);
           else
-            PORTA |= (1 << D2);
+            PORTA |= (1 << D6);
         }
       }
       else // lED2, LED5, LED7
       {
         if (abs(nick) < ANGLETHRESHOLD)
         {
-          PORTA |= (1 << D1);
-          PORTA |= (1 << D3);
-          PORTB |= (1 << D6);
+          PORTA |= (1 << D2);
+          PORTA |= (1 << D5);
+          PORTB |= (1 << D7);
         }
         else
         {
           if (nick < 0)
-            PORTA |= (1 << D6);
+            PORTA |= (1 << D2);
           else
-            PORTA |= (1 << D1);
+            PORTB |= (1 << D7);
         }
       }
     }
     else
     {
-      if (nick < 0) // LED6, LED7
+      if (nick < 0) // LED1, LED2
+      {
+        if (abs(roll) < ANGLETHRESHOLD)
+        {
+          PORTA |= (1 << D1);
+          PORTA |= (1 << D2);
+        }
+        else
+        {
+          if (roll < 0)
+            PORTA |= (1 << D1);
+          else
+            PORTA |= (1 << D2);
+        }
+      }
+      else // LED6, LED7
       {
         if (abs(roll) < ANGLETHRESHOLD)
         {
@@ -451,42 +470,51 @@ void spritLevel() {
           if (roll < 0)
             PORTA |= (1 << D6);
           else
-            PORTB |= (1 << D7);
-        }
-      }
-      else // LED1, LED2
-      {
-        if (abs(roll) < ANGLETHRESHOLD)
-        {
-          PORTA |= (1 << D1);
-          PORTA |= (1 << D2);
-        }
-        else
-        {
-          if (roll < 0)
-            PORTA |= (1 << D2);
-          else
-            PORTA |= 1 << D1;
+            PORTB |= 1 << D7;
         }
       }
     }
   }
 }
-
 // Calibration sequence after wakeup
 void calibrate() {
+  int16_t x, y, z;
+  int32_t x_increment = 0, y_increment = 0, z_increment = 0;
+  // Check if all LED's are working
   allLedOn();
-  _delay_ms(1000);
-  allLedOff();
-  _delay_ms(1000);
+  _delay_ms(CALIBRATION_STEP_DELAY);
+  // Check if the accelerometer is working
+  showNumber(1);
+  _delay_ms(CALIBRATION_STEP_DELAY);
   testI2C_read();
-  _delay_ms(1000);
-  allLedOff();
-  getAcceleration(&x_offset, &y_offset, &z_offset); // global varibles
-  _delay_ms(1000);
+  _delay_ms(CALIBRATION_STEP_DELAY);
+  showNumber(2);
+  _delay_ms(CALIBRATION_STEP_DELAY);
+  // Get the sensor offset x times
+  for(uint8_t i = 0; i < OFFSET_CALIBRATION_STEPS; i++) {
+    getAcceleration(&x, &y, &z);
+    x_increment += x;
+    y_increment += y;
+    z_increment += z;
+    _delay_ms(OFFSET_CALIBRATION_STEP_DELAY);
+  }
+  // Form the mean value
+  x_offset = x_increment / OFFSET_CALIBRATION_STEPS;
+  y_offset = y_increment / OFFSET_CALIBRATION_STEPS;
+  z_offset = z_increment / OFFSET_CALIBRATION_STEPS;
+  // Indicate that the calibration is done
+  showHook();
+  _delay_ms(CALIBRATION_STEP_DELAY);
   button_pressed++; // causing jump in the loop
 }
-
+// Sleep routine
+void goToSleep() {
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+  MMA8653FC_deInit();
+  deInit();
+  _delay_ms(10);
+  sleep_mode();
+}
 
 // ---------------------------------------------------------------- //
 // -- Main Function ----------------------------------------------- //
@@ -508,7 +536,7 @@ int main()
     else {
       // If button is pressed even times (2, 4, 6, ...), we do "dice" mode.
       if (button_pressed % 2) {
-        if (motionDetected()) {
+        if (motionDetected() == true) {
           dice();
         }
       }
