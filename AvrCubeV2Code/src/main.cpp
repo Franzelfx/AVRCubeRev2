@@ -37,14 +37,15 @@
 #define OFF false
 
 // Defines for control flow
-#define SLEEP_THRESHOLD 60000 // Seconds until the device go to sleep if no action occurs
+#define SLEEP_THRESHOLD 60000 // Millieconds until the device go to sleep if no action occurs
+#define FORCE_SLEEP_TIME 6000 // When button is hold this amout of milliseconds the device will go to sleep
 #define ACCELERATION_THRESHOLD 100 // The threshold for the absolute motion value in LSB registers
 #define DICE_STEPS_FIRST_ROUND 5 // The number of steps the dice has to roll
 #define DICE_STEPS_SECOND_ROUND 5 // The number of steps the dice has to roll
 #define DICE_TIME_STEPS 100 // The time step between dice rolls in ms
 #define DICE_TIME_STEPS_INCREASE 10 // The time step increase between dice rolls in ms in secon round
 #define ANGLETHRESHOLD 5 // The threshold for the angle in degrees
-#define CALIBRATION_STEP_DELAY 1000 // The delay between calibration steps in ms
+#define CALIBRATION_STEP_DELAY 500 // The delay between calibration steps in ms
 #define OFFSET_CALIBRATION_STEPS 10 // The number of calibration steps
 #define OFFSET_CALIBRATION_STEP_DELAY 10 // The delay between offset calibration steps in ms
 
@@ -339,7 +340,7 @@ void getAcceleration(int16_t* x, int16_t* y, int16_t* z) {
   *z = z_msb << 8 | z_lsb;
 }
 // Data processing and display
-bool motionDetected() {
+bool motionDetected(uint8_t threshold) {
   int8_t abs;
   int8_t x, y;
   // Get acceleration with unmasked sign bit
@@ -348,10 +349,10 @@ bool motionDetected() {
   x -= x_offset;
   y -= y_offset;
   abs = sqrt((float)(x * x + y * y));
-  if(abs > ACCELERATION_THRESHOLD){
+  if (abs > threshold) {
     return true;
   }
-  else{
+  else {
     return false;
   }
 }
@@ -382,7 +383,7 @@ void dice() {
   }
 }
 float getAngle(float axis, float gierAxis) {
-    return (atan(axis / gierAxis) * 4068) / 71; // (radians * 4068) / 71
+  return (atan(axis / gierAxis) * 4068) / 71; // (radians * 4068) / 71
 }
 void spritLevel() {
   int16_t x, y, z;
@@ -393,7 +394,7 @@ void spritLevel() {
   // to get better relative measurements (full calibration is not implemented)
   x = (x - x_offset);
   y = (y - y_offset);
-  if(z == 0)z = 1; // Avoid division by zero
+  if (z == 0)z = 1; // Avoid division by zero
   z = -abs(z); // Sensor is mounted upside down -> abs cause of tilt > 90°
   // The next step is to calculate the angle of the roll and nick
   roll = getAngle((float)x, (float)z);
@@ -491,7 +492,7 @@ void calibrate() {
   showNumber(2);
   _delay_ms(CALIBRATION_STEP_DELAY);
   // Get the sensor offset x times
-  for(uint8_t i = 0; i < OFFSET_CALIBRATION_STEPS; i++) {
+  for (uint8_t i = 0; i < OFFSET_CALIBRATION_STEPS; i++) {
     getAcceleration(&x, &y, &z);
     x_increment += x;
     y_increment += y;
@@ -536,13 +537,17 @@ int main()
     else {
       // If button is pressed even times (2, 4, 6, ...), we do "dice" mode.
       if (button_pressed % 2) {
-        if (motionDetected() == true) {
+        if (motionDetected(ACCELERATION_THRESHOLD) == true) {
           dice();
         }
       }
       else {
         // If button pressed odd times, we are in "sprit level" mode
         spritLevel();
+      }
+      // Check if the device is in motion to prevent sleep
+      if (motionDetected(ACCELERATION_THRESHOLD) == true) {
+        counter = 0;
       }
       // If button is pressed odd times, we do spirit level mode.
       // Go to sleep if inactivity
@@ -557,9 +562,21 @@ int main()
 // --------------------------------------------------------------- //
 ISR(INT0_vect)       // button interrupt
 {
+  uint16_t force_sleep_counter = 0;
   cli();                          // disable interrupts, to prevent double counting
+  allLedOff();
   button_pressed++;
-  while (!(PINB & (1 << BUTTON))) // as long as button is low
+  while (!(PINB & (1 << BUTTON))) {
+    // increase force sleep counter if button is still pressed
+    force_sleep_counter++;
+    showNumber(force_sleep_counter / 1000);
+    _delay_ms(1);
+  }
+  if (force_sleep_counter >= FORCE_SLEEP_TIME) {
+    goToSleep();
+    return;
+  }
+  // as long as button is low
   {
     _delay_ms(10);                // wait for debounce
   }
