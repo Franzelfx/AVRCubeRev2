@@ -1,26 +1,26 @@
 /**
- * @file main.hpp
+ * @file main.cpp
  * @author Fabian Franz fabian.franz0596@gmail.com
  * @brief Implementation of functionality for the "Cube Project".
  * @version 09.22
  * @date 2022-09-14
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  * \code
-  ______          _    _                 _                  
- |  ____|   /\   | |  | |               | |                 
- | |__     /  \  | |__| |  ______       | | ___ _ __   __ _ 
+  ______          _    _                 _
+ |  ____|   /\   | |  | |               | |
+ | |__     /  \  | |__| |  ______       | | ___ _ __   __ _
  |  __|   / /\ \ |  __  | |______|  _   | |/ _ \ '_ \ / _` |
  | |____ / ____ \| |  | |          | |__| |  __/ | | | (_| |
  |______/_/    \_\_|  |_|           \____/ \___|_| |_|\__,_|
-                                                                                                           
+
  * \endcode
  */
 
 #include "main.hpp"
 
-// Global variable for interrupt.
+ // Global variable for interrupt.
 volatile uint16_t counter = 0;        // Counter for the sleep timer. -> max = 65.535
 volatile uint8_t button_pressed = 0;  // Counter for button pressed, to decide if even or odd.
 int16_t x_offset, y_offset, z_offset; // Global variables for sensor offset.
@@ -29,9 +29,6 @@ int16_t x_offset, y_offset, z_offset; // Global variables for sensor offset.
 // ---------------------------------------------------------------- //
 // -- Local functions --------------------------------------------- //
 // ---------------------------------------------------------------- //
-int main();
-void calibrate();
-// Utility Functions
 void setLedPins(uint8_t mode)
 {
   if (mode == OUTPUT) {
@@ -51,7 +48,7 @@ void setSDA(bool mode) {
     PORTA |= (1 << SDA);
   }
   // If SDA has to be set "off", pin will be driven low
-  else if(mode == OFF){
+  else if (mode == OFF) {
     DDRA |= (1 << SDA);
     PORTA &= ~(1 << SDA);
   }
@@ -287,20 +284,6 @@ void getAcceleration(int16_t* x, int16_t* y, int16_t* z) {
   *z = z_msb << 8 | z_lsb;
 }
 // Data processing and display
-bool motionDetected(uint8_t threshold) {
-  int16_t x = 0, y = 0, z = 0, abs;
-  getAcceleration(&x, &y, &z);
-  x = (x - x_offset);
-  y = (y - y_offset);
-  z = (z - z_offset);
-  abs = sqrt(x * x + y * y + z * z);
-  if(abs > threshold) {
-    return true;
-  }
-  else {
-    return false;
-  }
-}
 void dynamicDelay(uint16_t ms) {
   while (0 < ms)
   {
@@ -308,31 +291,11 @@ void dynamicDelay(uint16_t ms) {
     ms--;
   }
 }
-void dice() {
-  uint16_t timeSteps = DICE_TIME_STEPS;
-  uint8_t randomeNumber = 0;
-  // Set the randome seed
-  srand(counter);
-  // First dice relatively fast
-  for (uint8_t i = 0; i < DICE_STEPS_FIRST_ROUND; i++) {
-    dynamicDelay(timeSteps);
-    randomeNumber = (rand() % 6) + 1;
-    showNumber(randomeNumber);
-  }
-  // Then dice slower on every loop iteration
-  for (uint8_t i = 0; i < DICE_STEPS_SECOND_ROUND; i++) {
-    dynamicDelay(timeSteps + DICE_TIME_STEPS_INCREASE);
-    randomeNumber = (rand() % 6) + 1;
-    showNumber(randomeNumber);
-    timeSteps += DICE_TIME_STEPS;
-  }
-}
 float getAngle(float axis, float reference) {
   return (atan(axis / reference) * 4068) / 71; // (radians * 4068) / 71
 }
-void spritLevel() {
+void getRollNick(float* roll, float* nick){
   int16_t x, y, z;
-  float roll, nick;
   // First we get raw data from the accelerometer
   getAcceleration(&x, &y, &z);
   // Then we substract the offset from the x and y axis, 
@@ -343,8 +306,41 @@ void spritLevel() {
   z = -abs(z);      // Sensor is mounted upside down -> abs cause of tilt > 90°
   // The next step is to calculate the angle of the roll and nick
   // TODO: better calculation with sqrt(y * y + z * z) and sqrt(x * x + z * z)
-  roll = getAngle((float)x, (float)z_offset); // Not exact but sufficient, precise: sqrt(y * y + z * z) instead of z_offset
-  nick = getAngle((float)y, (float)z_offset);
+  *roll = getAngle((float)x, (float)z_offset); // Not exact but sufficient, precise: sqrt(y * y + z * z) instead of z_offset
+  *nick = getAngle((float)y, (float)z_offset);
+}
+int16_t getGradient(int16_t baseValue){
+  static int16_t prev_baseValue;
+  int16_t gradient = 0;
+
+  if(!prev_baseValue){
+    prev_baseValue = baseValue;
+  }
+  else{
+    gradient = baseValue - prev_baseValue;
+    prev_baseValue = baseValue;
+  }
+  return gradient;
+}
+bool motionDetected(uint8_t threshold) {
+  float roll, nick;
+  // First we get raw data from the accelerometer
+  getRollNick(&roll, &nick);
+
+  nick = getGradient(nick);
+  roll = getGradient(roll);
+
+  if (nick > threshold || roll > threshold) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+void spritLevel() {
+  float roll, nick;
+
+  getRollNick(&roll, &nick);
   // Now we display the anles with the LED'S
   allLedOff();
   // check if the device is balanced
@@ -423,6 +419,25 @@ void spritLevel() {
     }
   }
 }
+void dice() {
+  uint16_t timeSteps = DICE_TIME_STEPS;
+  uint8_t randomeNumber = 0;
+  // Set the randome seed
+  srand(counter);
+  // First dice relatively fast
+  for (uint8_t i = 0; i < DICE_STEPS_FIRST_ROUND; i++) {
+    dynamicDelay(timeSteps);
+    randomeNumber = (rand() % 6) + 1;
+    showNumber(randomeNumber);
+  }
+  // Then dice slower on every loop iteration
+  for (uint8_t i = 0; i < DICE_STEPS_SECOND_ROUND; i++) {
+    dynamicDelay(timeSteps + DICE_TIME_STEPS_INCREASE);
+    randomeNumber = (rand() % 6) + 1;
+    showNumber(randomeNumber);
+    timeSteps += DICE_TIME_STEPS;
+  }
+}
 // Calibration sequence after wakeup
 void calibrate() {
   int16_t x, y, z;
@@ -483,8 +498,9 @@ int main()
     else {
       // If button is pressed even times (2, 4, 6, ...), we do "dice" mode.
       if (button_pressed % 2) {
-        if (motionDetected(ACCELERATION_THRESHOLD) == true) {
+        if (motionDetected(ANGLE_GRADIENT_THRESHOLD) == true) {
           dice();
+          _delay_ms(10);
         }
       }
       else {
@@ -492,7 +508,7 @@ int main()
         spritLevel();
       }
       // Check if the device is in motion to prevent sleep
-      if (motionDetected(ACCELERATION_THRESHOLD) == true) {
+      if (motionDetected(ANGLE_GRADIENT_THRESHOLD) == true) {
         counter = 0;
       }
       // If button is pressed odd times, we do spirit level mode.
@@ -520,7 +536,8 @@ ISR(INT0_vect) // button interrupt
   if (force_sleep_counter >= FORCE_SLEEP_TIME) {
     goToSleep();
     return;
-  }else{
+  }
+  else {
     _delay_ms(10); // wait for debounce
   }
   counter = 0;     // reset counter, cause pressing button is external activity from user

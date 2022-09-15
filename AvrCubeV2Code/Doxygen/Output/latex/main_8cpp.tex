@@ -1,0 +1,503 @@
+\hypertarget{main_8cpp}{}\doxysection{/\+Users/\+Fabian\+Franz/\+Development/\+Projects/\+AVRCube\+Rev2/\+Avr\+Cube\+V2\+Code/src/main.cpp File Reference}
+\label{main_8cpp}\index{/Users/FabianFranz/Development/Projects/AVRCubeRev2/AvrCubeV2Code/src/main.cpp@{/Users/FabianFranz/Development/Projects/AVRCubeRev2/AvrCubeV2Code/src/main.cpp}}
+
+
+Implementation of functionality for the \char`\"{}\+Cube Project\char`\"{}.  
+
+
+{\ttfamily \#include \char`\"{}main.\+hpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8cpp_a51af30a60f9f02777c6396b8247e356f}\label{main_8cpp_a51af30a60f9f02777c6396b8247e356f}} 
+int {\bfseries main} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_ad4a7316a51b17d0f691bb3e33b95a5ad}{calibrate}} ()
+\begin{DoxyCompactList}\small\item\em Short calibration of the MMA8653\+FC values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_afba8e902a4da30abfe29621fda1cc366}{set\+Led\+Pins}} (uint8\+\_\+t mode)
+\begin{DoxyCompactList}\small\item\em Set the LED Pins eigther \char`\"{}\+INPUT\char`\"{} or \char`\"{}\+OUTPUT\char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_aadd43bc557b310697469aac6bcf5912f}{set\+SDA}} (bool mode)
+\begin{DoxyCompactList}\small\item\em Set the SDA pin eighter \char`\"{}\+ON\char`\"{} or \char`\"{}\+OFF\char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a33fd27020598179282ed16f419b3f05a}{set\+SCL}} (bool mode)
+\begin{DoxyCompactList}\small\item\em Set the SCL pin eighter \char`\"{}\+ON\char`\"{} or \char`\"{}\+OFF\char`\"{}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8cpp_a02fd73d861ef2e4aabb38c0c9ff82947}\label{main_8cpp_a02fd73d861ef2e4aabb38c0c9ff82947}} 
+void {\bfseries init} ()
+\begin{DoxyCompactList}\small\item\em Initialises all the AVR hardware E.\+g. ports, interrupts, timers, etc. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8cpp_a689062610be46683c09649389dc09673}\label{main_8cpp_a689062610be46683c09649389dc09673}} 
+void {\bfseries all\+Led\+On} ()
+\begin{DoxyCompactList}\small\item\em Turn on all LEDs (LED1 -\/ LED7) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8cpp_aa60d36843178702d5fbc8f55b7f83c83}\label{main_8cpp_aa60d36843178702d5fbc8f55b7f83c83}} 
+void {\bfseries all\+Led\+Off} ()
+\begin{DoxyCompactList}\small\item\em Turn off all LEDs (LED1 -\/ LED7) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a1fab646859e896a35a664b8f609c6d76}{de\+Init}} ()
+\begin{DoxyCompactList}\small\item\em Deeinitialises all the AVR hardware E.\+g. ports, interrupts, timers, etc. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a19ed45fdb0ad36417435b46fb1b48de9}{show\+Number}} (uint8\+\_\+t number\+To\+Show)
+\begin{DoxyCompactList}\small\item\em Show a number between 1 and 6 on the LEDs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a9211bc663b471230e12168153dfbc984}{show\+Cross}} ()
+\begin{DoxyCompactList}\small\item\em Show a cross on the LEDs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a73a9d6515ecc6b702051eb5d9f90369e}{show\+Hook}} ()
+\begin{DoxyCompactList}\small\item\em Show a hook on the LEDs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a905c049550cebedf53cc88061f7e4b10}{test\+Leds}} ()
+\begin{DoxyCompactList}\small\item\em Check if all LEDs are working correctly. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a60de64d75454385b23995437f1d72669}{start}} ()
+\begin{DoxyCompactList}\small\item\em I2C Bit\+Bang start condition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a8c528baf37154d347366083f0f816846}{stop}} ()
+\begin{DoxyCompactList}\small\item\em I2C Bit\+Bang stop condition. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_aee50f855dff840a3ce9870f6e289365e}{tx}} (uint8\+\_\+t dat)
+\begin{DoxyCompactList}\small\item\em I2C Bit\+Bang tx of one byte. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{main_8cpp_a945deb388e5928de12dd7f6c2181b93a}{rx}} (bool ack)
+\begin{DoxyCompactList}\small\item\em I2C Bit\+Bang rx of one byte. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{main_8cpp_aa6db46255cb370c4b02a204daefb40c2}{read\+Register}} (uint8\+\_\+t reg)
+\begin{DoxyCompactList}\small\item\em Read a register from the MMA8653\+FC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ad8ba71135cb5de6780571d5711816763}{write\+Register}} (uint8\+\_\+t reg, uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Write a value to a register of the MMA8653\+FC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_af3a3ef29e3e54bf2d1f3cd58a28db141}{test\+I2\+C\+\_\+read}} ()
+\begin{DoxyCompactList}\small\item\em Checks, if the I2C connection to the MMA8653\+FC is working. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8cpp_ab0ec380bbe8e09a3fd0b30c626735211}\label{main_8cpp_ab0ec380bbe8e09a3fd0b30c626735211}} 
+void {\bfseries MMA8653\+FC\+\_\+init} ()
+\begin{DoxyCompactList}\small\item\em Initialise the MMA8653\+FC range ans mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8cpp_a7d6f235ac035b0e4642ed46e27e70b58}\label{main_8cpp_a7d6f235ac035b0e4642ed46e27e70b58}} 
+void {\bfseries MMA8653\+FC\+\_\+de\+Init} ()
+\begin{DoxyCompactList}\small\item\em Deinitialise the MMA8653\+FC to safe energy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ae2a0877a530ab4eead989e572435144e}{get\+Acceleration}} (int16\+\_\+t $\ast$x, int16\+\_\+t $\ast$y, int16\+\_\+t $\ast$z)
+\begin{DoxyCompactList}\small\item\em Read the acceleration data from the MMA8653\+FC. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_a04cb44f56b022b414f1c79a12aa04593}{motion\+Detected}} (uint8\+\_\+t threshold)
+\begin{DoxyCompactList}\small\item\em Get\textquotesingle{}s true, if the device is in motion and threshold is reached. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a9920ab102e90b7f53bfde9446b7c60c2}{dynamic\+Delay}} (uint16\+\_\+t ms)
+\begin{DoxyCompactList}\small\item\em Implemetation of a variable delay. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_af7eb3c763899937d00b615725c044482}{dice}} ()
+\begin{DoxyCompactList}\small\item\em Realises a random number from 1 -\/ 6 and show it on the LEDs. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{main_8cpp_aaecc05df0106098c3f4b8628eaf8c180}{get\+Angle}} (float axis, float reference)
+\begin{DoxyCompactList}\small\item\em Get the Angle between two acceleration values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_afc89088f52dd8ba8b6cf388b8b08dfbe}{sprit\+Level}} ()
+\begin{DoxyCompactList}\small\item\em Shows the sprit level on the LEDs. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8cpp_ae2da94e03570cd696d5e1ef31169b6f3}\label{main_8cpp_ae2da94e03570cd696d5e1ef31169b6f3}} 
+void {\bfseries go\+To\+Sleep} ()
+\item 
+\mbox{\Hypertarget{main_8cpp_aa46728f363b930405929002b77ae1a93}\label{main_8cpp_aa46728f363b930405929002b77ae1a93}} 
+{\bfseries cli} ()
+\item 
+\mbox{\Hypertarget{main_8cpp_a8cf8570b115590b08797f57d060c0947}\label{main_8cpp_a8cf8570b115590b08797f57d060c0947}} 
+{\bfseries while} (!(PINB \&(1$<$$<$ BUTTON)))
+\item 
+\mbox{\Hypertarget{main_8cpp_a968151cc504eb9a3b6500403ddd050dd}\label{main_8cpp_a968151cc504eb9a3b6500403ddd050dd}} 
+{\bfseries if} (force\+\_\+sleep\+\_\+counter $>$=FORCE\+\_\+\+SLEEP\+\_\+\+TIME)
+\item 
+\mbox{\Hypertarget{main_8cpp_a2e26f96722be69d8ac30ea9e875be18d}\label{main_8cpp_a2e26f96722be69d8ac30ea9e875be18d}} 
+{\bfseries sei} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8cpp_a61f7b3cbcedea4bae0c663c892d5d07f}\label{main_8cpp_a61f7b3cbcedea4bae0c663c892d5d07f}} 
+volatile uint16\+\_\+t {\bfseries counter} = 0
+\item 
+\mbox{\Hypertarget{main_8cpp_a10187a2aeb347c2db2521d0d32af0201}\label{main_8cpp_a10187a2aeb347c2db2521d0d32af0201}} 
+volatile uint8\+\_\+t {\bfseries button\+\_\+pressed} = 0
+\item 
+\mbox{\Hypertarget{main_8cpp_ada787c774a33c1c031068056ea365207}\label{main_8cpp_ada787c774a33c1c031068056ea365207}} 
+int16\+\_\+t {\bfseries x\+\_\+offset}
+\item 
+\mbox{\Hypertarget{main_8cpp_ace7982aedb64f15c7c9d05757fc233cc}\label{main_8cpp_ace7982aedb64f15c7c9d05757fc233cc}} 
+int16\+\_\+t {\bfseries y\+\_\+offset}
+\item 
+\mbox{\Hypertarget{main_8cpp_afb71a6840a8990b14856f11243d3d75e}\label{main_8cpp_afb71a6840a8990b14856f11243d3d75e}} 
+int16\+\_\+t {\bfseries z\+\_\+offset}
+\item 
+\mbox{\hyperlink{main_8cpp_a0544c3fe466e421738dae463968b70ba}{else}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of functionality for the \char`\"{}\+Cube Project\char`\"{}. 
+
+\begin{DoxyAuthor}{Author}
+Fabian Franz \href{mailto:fabian.franz0596@gmail.com}{\texttt{ fabian.\+franz0596@gmail.\+com}} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+09.\+22 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/09-\/14
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022
+\end{DoxyCopyright}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \_\_\_\_\_\_          \_    \_                 \_                  }
+\DoxyCodeLine{|  \_\_\_\_|   /\(\backslash\)   | |  | |               | |                 }
+\DoxyCodeLine{| |\_\_     /  \(\backslash\)  | |\_\_| |  \_\_\_\_\_\_       | | \_\_\_ \_ \_\_   \_\_ \_ }
+\DoxyCodeLine{|  \_\_|   / /\(\backslash\) \(\backslash\) |  \_\_  | |\_\_\_\_\_\_|  \_   | |/ \_ \(\backslash\) \textcolor{stringliteral}{'\_ \(\backslash\) / \_` |}}
+\DoxyCodeLine{\textcolor{stringliteral}{| |\_\_\_\_ / \_\_\_\_ \(\backslash\)| |  | |          | |\_\_| |  \_\_/ | | | (\_| |}}
+\DoxyCodeLine{\textcolor{stringliteral}{|\_\_\_\_\_\_/\_/    \(\backslash\)\_\(\backslash\)\_|  |\_|           \(\backslash\)\_\_\_\_/ \(\backslash\)\_\_\_|\_| |\_|\(\backslash\)\_\_,\_|}}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_ad4a7316a51b17d0f691bb3e33b95a5ad}\label{main_8cpp_ad4a7316a51b17d0f691bb3e33b95a5ad}} 
+\index{main.cpp@{main.cpp}!calibrate@{calibrate}}
+\index{calibrate@{calibrate}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{calibrate()}{calibrate()}}
+{\footnotesize\ttfamily void calibrate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Short calibration of the MMA8653\+FC values. 
+
+\begin{DoxyRemark}{Remarks}
+The calibration will first check if the device can be reached via the I2C connection. If not, it will show a cross on the LEDs and go to sleep. After that, it will read the current acceleration values and get the offset. The offset will be stored in the non persistant memory of the device. It is used to compensate the offset for angle calculation and motion detection. 
+\end{DoxyRemark}
+\mbox{\Hypertarget{main_8cpp_a1fab646859e896a35a664b8f609c6d76}\label{main_8cpp_a1fab646859e896a35a664b8f609c6d76}} 
+\index{main.cpp@{main.cpp}!deInit@{deInit}}
+\index{deInit@{deInit}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{deInit()}{deInit()}}
+{\footnotesize\ttfamily void de\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Deeinitialises all the AVR hardware E.\+g. ports, interrupts, timers, etc. 
+
+\begin{DoxyRemark}{Remarks}
+Calling \mbox{\hyperlink{main_8hpp_a1fab646859e896a35a664b8f609c6d76}{de\+Init()}}; is necessary to save power before the CPU goes to sleep. 
+\end{DoxyRemark}
+\mbox{\Hypertarget{main_8cpp_af7eb3c763899937d00b615725c044482}\label{main_8cpp_af7eb3c763899937d00b615725c044482}} 
+\index{main.cpp@{main.cpp}!dice@{dice}}
+\index{dice@{dice}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{dice()}{dice()}}
+{\footnotesize\ttfamily void dice (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Realises a random number from 1 -\/ 6 and show it on the LEDs. 
+
+\begin{DoxyRemark}{Remarks}
+It will first generate and show some randome numbers with a long delay between them. Then the delay gets shorter. Finally, it will peristently show a random number on the LEDs. The function can only be stopped by external interrupt. 
+\end{DoxyRemark}
+\mbox{\Hypertarget{main_8cpp_a9920ab102e90b7f53bfde9446b7c60c2}\label{main_8cpp_a9920ab102e90b7f53bfde9446b7c60c2}} 
+\index{main.cpp@{main.cpp}!dynamicDelay@{dynamicDelay}}
+\index{dynamicDelay@{dynamicDelay}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{dynamicDelay()}{dynamicDelay()}}
+{\footnotesize\ttfamily void dynamic\+Delay (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{ms }\end{DoxyParamCaption})}
+
+
+
+Implemetation of a variable delay. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ms} & The time you want the core to not execute any code. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_ae2a0877a530ab4eead989e572435144e}\label{main_8cpp_ae2a0877a530ab4eead989e572435144e}} 
+\index{main.cpp@{main.cpp}!getAcceleration@{getAcceleration}}
+\index{getAcceleration@{getAcceleration}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{getAcceleration()}{getAcceleration()}}
+{\footnotesize\ttfamily void get\+Acceleration (\begin{DoxyParamCaption}\item[{int16\+\_\+t $\ast$}]{x,  }\item[{int16\+\_\+t $\ast$}]{y,  }\item[{int16\+\_\+t $\ast$}]{z }\end{DoxyParamCaption})}
+
+
+
+Read the acceleration data from the MMA8653\+FC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/axis acceleration data (call by reference). \\
+\hline
+{\em y} & The y-\/axis acceleration data (call by reference). \\
+\hline
+{\em z} & The z-\/axis acceleration data (call by reference).\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// usage example}}
+\DoxyCodeLine{int16\_t x, y, z;}
+\DoxyCodeLine{MMA8653FC\_read(\&x, \&y, \&z);}
+
+\end{DoxyCode}
+ \mbox{\Hypertarget{main_8cpp_aaecc05df0106098c3f4b8628eaf8c180}\label{main_8cpp_aaecc05df0106098c3f4b8628eaf8c180}} 
+\index{main.cpp@{main.cpp}!getAngle@{getAngle}}
+\index{getAngle@{getAngle}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{getAngle()}{getAngle()}}
+{\footnotesize\ttfamily float get\+Angle (\begin{DoxyParamCaption}\item[{float}]{axis,  }\item[{float}]{reference }\end{DoxyParamCaption})}
+
+
+
+Get the Angle between two acceleration values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em axis} & The orthogonal axis of device rotation. \\
+\hline
+{\em reference} & The reference acceleration value of the other axis.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float Resulting angle in degree.
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+The function is used to calculate the angle between a reference acceleration value and the acceleration value of the axis where the amount of acceleration is changing. A best practise to calculate the angle would be\+:
+\begin{DoxyEnumerate}
+\item Read all the acceleration values from the sensor (x, y, z).
+\item Calculate the amount of motion on those axis where the acceleration doesn\textquotesingle{}t change significantly. E.\+g.\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{amount = sqrt(y * y + z * z); }
+
+\end{DoxyCode}
+
+\item Calculate the angle between the amount of motion and the acceleration value of the axis where the amount of motion is changing. E.\+g.\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{angle = \mbox{\hyperlink{main_8cpp_aaecc05df0106098c3f4b8628eaf8c180}{getAngle}}(x, amount); }
+
+\end{DoxyCode}
+
+\item Use the angle to calculate the rotation of the device. For further information read\+: \href{https://www.nxp.com/docs/en/application-note/AN3461.pdf}{\texttt{ https\+://www.\+nxp.\+com/docs/en/application-\/note/\+AN3461.\+pdf}} 
+\end{DoxyEnumerate}
+\end{DoxyRemark}
+\mbox{\Hypertarget{main_8cpp_a04cb44f56b022b414f1c79a12aa04593}\label{main_8cpp_a04cb44f56b022b414f1c79a12aa04593}} 
+\index{main.cpp@{main.cpp}!motionDetected@{motionDetected}}
+\index{motionDetected@{motionDetected}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{motionDetected()}{motionDetected()}}
+{\footnotesize\ttfamily bool motion\+Detected (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{threshold }\end{DoxyParamCaption})}
+
+
+
+Get\textquotesingle{}s true, if the device is in motion and threshold is reached. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em threshold} & Activation threshold in bit.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if threshold is reached. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_aa6db46255cb370c4b02a204daefb40c2}\label{main_8cpp_aa6db46255cb370c4b02a204daefb40c2}} 
+\index{main.cpp@{main.cpp}!readRegister@{readRegister}}
+\index{readRegister@{readRegister}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{readRegister()}{readRegister()}}
+{\footnotesize\ttfamily uint8\+\_\+t read\+Register (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{reg }\end{DoxyParamCaption})}
+
+
+
+Read a register from the MMA8653\+FC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & The register to read.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value of the register. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_a945deb388e5928de12dd7f6c2181b93a}\label{main_8cpp_a945deb388e5928de12dd7f6c2181b93a}} 
+\index{main.cpp@{main.cpp}!rx@{rx}}
+\index{rx@{rx}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{rx()}{rx()}}
+{\footnotesize\ttfamily uint8\+\_\+t rx (\begin{DoxyParamCaption}\item[{bool}]{ack }\end{DoxyParamCaption})}
+
+
+
+I2C Bit\+Bang rx of one byte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ack} & ACK or NACK (acknowledge or no acknowledge)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The received byte. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_afba8e902a4da30abfe29621fda1cc366}\label{main_8cpp_afba8e902a4da30abfe29621fda1cc366}} 
+\index{main.cpp@{main.cpp}!setLedPins@{setLedPins}}
+\index{setLedPins@{setLedPins}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{setLedPins()}{setLedPins()}}
+{\footnotesize\ttfamily void set\+Led\+Pins (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{mode }\end{DoxyParamCaption})}
+
+
+
+Set the LED Pins eigther \char`\"{}\+INPUT\char`\"{} or \char`\"{}\+OUTPUT\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & OUTPUT = 0 or INPUT = 1 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a33fd27020598179282ed16f419b3f05a}\label{main_8cpp_a33fd27020598179282ed16f419b3f05a}} 
+\index{main.cpp@{main.cpp}!setSCL@{setSCL}}
+\index{setSCL@{setSCL}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{setSCL()}{setSCL()}}
+{\footnotesize\ttfamily void set\+SCL (\begin{DoxyParamCaption}\item[{bool}]{mode }\end{DoxyParamCaption})}
+
+
+
+Set the SCL pin eighter \char`\"{}\+ON\char`\"{} or \char`\"{}\+OFF\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & \char`\"{}\+ON\char`\"{} (input pullup) or \char`\"{}\+OFF\char`\"{} (output low) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_aadd43bc557b310697469aac6bcf5912f}\label{main_8cpp_aadd43bc557b310697469aac6bcf5912f}} 
+\index{main.cpp@{main.cpp}!setSDA@{setSDA}}
+\index{setSDA@{setSDA}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{setSDA()}{setSDA()}}
+{\footnotesize\ttfamily void set\+SDA (\begin{DoxyParamCaption}\item[{bool}]{mode }\end{DoxyParamCaption})}
+
+
+
+Set the SDA pin eighter \char`\"{}\+ON\char`\"{} or \char`\"{}\+OFF\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & \char`\"{}\+ON\char`\"{} (input pullup) or \char`\"{}\+OFF\char`\"{} (output low) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a9211bc663b471230e12168153dfbc984}\label{main_8cpp_a9211bc663b471230e12168153dfbc984}} 
+\index{main.cpp@{main.cpp}!showCross@{showCross}}
+\index{showCross@{showCross}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{showCross()}{showCross()}}
+{\footnotesize\ttfamily void show\+Cross (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Show a cross on the LEDs. 
+
+\begin{DoxyRemark}{Remarks}
+This function is used to indicate some error. 
+\end{DoxyRemark}
+\mbox{\Hypertarget{main_8cpp_a73a9d6515ecc6b702051eb5d9f90369e}\label{main_8cpp_a73a9d6515ecc6b702051eb5d9f90369e}} 
+\index{main.cpp@{main.cpp}!showHook@{showHook}}
+\index{showHook@{showHook}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{showHook()}{showHook()}}
+{\footnotesize\ttfamily void show\+Hook (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Show a hook on the LEDs. 
+
+\begin{DoxyRemark}{Remarks}
+This function is used to indicate some success. 
+\end{DoxyRemark}
+\mbox{\Hypertarget{main_8cpp_a19ed45fdb0ad36417435b46fb1b48de9}\label{main_8cpp_a19ed45fdb0ad36417435b46fb1b48de9}} 
+\index{main.cpp@{main.cpp}!showNumber@{showNumber}}
+\index{showNumber@{showNumber}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{showNumber()}{showNumber()}}
+{\footnotesize\ttfamily void show\+Number (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{number\+To\+Show }\end{DoxyParamCaption})}
+
+
+
+Show a number between 1 and 6 on the LEDs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em number\+Toshow} & The number to show on the LEDs.\\
+\hline
+\end{DoxyParams}
+Lremark If the number is larger than 6, no LED will be turned on. \mbox{\Hypertarget{main_8cpp_afc89088f52dd8ba8b6cf388b8b08dfbe}\label{main_8cpp_afc89088f52dd8ba8b6cf388b8b08dfbe}} 
+\index{main.cpp@{main.cpp}!spritLevel@{spritLevel}}
+\index{spritLevel@{spritLevel}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{spritLevel()}{spritLevel()}}
+{\footnotesize\ttfamily void sprit\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Shows the sprit level on the LEDs. 
+
+\begin{DoxyRemark}{Remarks}
+The function internally calculates the roll and the nick angle of the device. It then uses the calculated angles to show in which direction the device is rotated. When it is at rest, only the LED in the middle will be turned on. When the device is rotated, the LEDs on the corresponding side will be turned on. 
+\end{DoxyRemark}
+\mbox{\Hypertarget{main_8cpp_a60de64d75454385b23995437f1d72669}\label{main_8cpp_a60de64d75454385b23995437f1d72669}} 
+\index{main.cpp@{main.cpp}!start@{start}}
+\index{start@{start}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily void start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+I2C Bit\+Bang start condition. 
+
+\mbox{\Hypertarget{main_8cpp_a8c528baf37154d347366083f0f816846}\label{main_8cpp_a8c528baf37154d347366083f0f816846}} 
+\index{main.cpp@{main.cpp}!stop@{stop}}
+\index{stop@{stop}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily void stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+I2C Bit\+Bang stop condition. 
+
+\mbox{\Hypertarget{main_8cpp_af3a3ef29e3e54bf2d1f3cd58a28db141}\label{main_8cpp_af3a3ef29e3e54bf2d1f3cd58a28db141}} 
+\index{main.cpp@{main.cpp}!testI2C\_read@{testI2C\_read}}
+\index{testI2C\_read@{testI2C\_read}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{testI2C\_read()}{testI2C\_read()}}
+{\footnotesize\ttfamily void test\+I2\+C\+\_\+read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Checks, if the I2C connection to the MMA8653\+FC is working. 
+
+\begin{DoxyRemark}{Remarks}
+If the communication is not working, it will be shown on the LEDs as a cross. Furthermore, the device will go to sleep. 
+\end{DoxyRemark}
+\mbox{\Hypertarget{main_8cpp_a905c049550cebedf53cc88061f7e4b10}\label{main_8cpp_a905c049550cebedf53cc88061f7e4b10}} 
+\index{main.cpp@{main.cpp}!testLeds@{testLeds}}
+\index{testLeds@{testLeds}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{testLeds()}{testLeds()}}
+{\footnotesize\ttfamily void test\+Leds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Check if all LEDs are working correctly. 
+
+\mbox{\Hypertarget{main_8cpp_aee50f855dff840a3ce9870f6e289365e}\label{main_8cpp_aee50f855dff840a3ce9870f6e289365e}} 
+\index{main.cpp@{main.cpp}!tx@{tx}}
+\index{tx@{tx}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{tx()}{tx()}}
+{\footnotesize\ttfamily bool tx (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{dat }\end{DoxyParamCaption})}
+
+
+
+I2C Bit\+Bang tx of one byte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dat} & The byte to send.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ACK or NACK (acknowledge or no acknowledge) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_ad8ba71135cb5de6780571d5711816763}\label{main_8cpp_ad8ba71135cb5de6780571d5711816763}} 
+\index{main.cpp@{main.cpp}!writeRegister@{writeRegister}}
+\index{writeRegister@{writeRegister}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{writeRegister()}{writeRegister()}}
+{\footnotesize\ttfamily void write\+Register (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{reg,  }\item[{uint8\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+
+
+Write a value to a register of the MMA8653\+FC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & The register to write. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{main_8cpp_a0544c3fe466e421738dae463968b70ba}\label{main_8cpp_a0544c3fe466e421738dae463968b70ba}} 
+\index{main.cpp@{main.cpp}!else@{else}}
+\index{else@{else}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{else}{else}}
+{\footnotesize\ttfamily else}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \_delay\_ms(10)}
+
+\end{DoxyCode}

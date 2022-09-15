@@ -1,7 +1,7 @@
 /**
  * @file main.hpp
  * @author Fabian Franz fabian.franz0596@gmail.com
- * @brief Function includes, defines and function prototypes for main.cpp
+ * @brief Includes, defines and function prototypes for the "Cube Project".
  * @version 09.22
  * @date 2022-09-14
  * 
@@ -65,18 +65,19 @@
 #define OFF false
 
 // Defines for control flow
-#define SLEEP_THRESHOLD 60000       // Millieconds until the device go to sleep if no action occurs
-#define ACCELERATION_THRESHOLD 100  // The threshold for the absolute motion value in LSB registers
+#define SLEEP_THRESHOLD 60000                 // Millieconds until the device go to sleep if no action occurs
+#define ANGLE_GRADIENT_THRESHOLD 25  // The threshold for the absolute motion value in LSB registers
 #define DICE_STEPS_FIRST_ROUND 5    // The number of steps the dice has to roll
 #define DICE_STEPS_SECOND_ROUND 5   // The number of steps the dice has to roll
 #define DICE_TIME_STEPS 100         // The time step between dice rolls in ms
 #define DICE_TIME_STEPS_INCREASE 10 // The time step increase between dice rolls in ms in secon round
-#define ANGLETHRESHOLD 5            // The threshold for the angle in degrees
+#define ANGLETHRESHOLD 1            // The threshold for the angle in degrees
 #define CALIBRATION_STEP_DELAY 500  // The delay between calibration steps in ms
 #define OFFSET_CALIBRATION_STEPS 10      // The number of calibration steps
 #define OFFSET_CALIBRATION_STEP_DELAY 10 // The delay between offset calibration steps in ms
 #define FORCE_SLEEP_STEPTIME 500         // The delay until new number
 #define FORCE_SLEEP_TIME 6 * FORCE_SLEEP_STEPTIME // When button is hold this amout of milliseconds the device will go to sleep
+#define MOTION_MEASURING_REPETITIONS 5 // The number of repetitions for the motion measuring
 
 // Defines for I2C
 #define I2C_DELAY 10 // 10 us -> 100 kHz
@@ -257,13 +258,14 @@ void MMA8653FC_deInit();
 void getAcceleration(int16_t* x, int16_t* y, int16_t* z);
 
 /**
- * @brief Get information if device in motion, if threshold is reached.
+ * @brief Get's true, if the device is in motion and threshold is reached.
  * 
  * @param threshold Activation threshold in bit.
  * 
  * @return true if threshold is reached.
  */
-bool motionDetected(uint8_t threshold);
+
+void getAcceleration(int16_t* x, int16_t* y, int16_t* z, uint8_t repetitions);
 
 /**
  * @brief Implemetation of a variable delay.
@@ -273,22 +275,12 @@ bool motionDetected(uint8_t threshold);
 void dynamicDelay(uint16_t ms);
 
 /**
- * @brief Realises a random number from 1 - 6 and show it on the LEDs.
- * 
- * @remark It will first generate and show some randome numbers with
- *         a long delay between them. Then the delay gets shorter. 
- *         Finally, it will peristently show a random number on the LEDs.
- *         The function can only be stopped by external interrupt.
- */
-void dice();
-
-/**
  * @brief Get the Angle between two acceleration values.
  * 
  * @param axis The orthogonal axis of device rotation. 
  * @param reference  The reference acceleration value of the other axis.
  * 
- * @return float Rsulting angle in degree.
+ * @return float Resulting angle in degree.
  * 
  * @remarks The function is used to calculate the angle between a
  *          reference acceleration value and the acceleration value
@@ -308,6 +300,15 @@ void dice();
  */
 float getAngle(float axis, float reference);
 
+// TODO: add documentation
+void getRollNick(float* roll, float* nick);
+
+//TODO: add documentation
+int16_t getGradient(int16_t baseValue);
+
+//TODO: add documentation
+bool motionDetected(uint8_t threshold);
+
 /**
  * @brief Shows the sprit level on the LEDs.
  * 
@@ -319,6 +320,16 @@ float getAngle(float axis, float reference);
  *          corresponding side will be turned on.
  */
 void spritLevel();
+
+/**
+ * @brief Realises a random number from 1 - 6 and show it on the LEDs.
+ * 
+ * @remark It will first generate and show some randome numbers with
+ *         a long delay between them. Then the delay gets shorter. 
+ *         Finally, it will peristently show a random number on the LEDs.
+ *         The function can only be stopped by external interrupt.
+ */
+void dice();
 
 /**
  * @brief Short calibration of the MMA8653FC values.
@@ -333,5 +344,22 @@ void spritLevel();
  *           motion detection.
  */
 void calibrate();
+
+/**
+ * @brief Set the sleep mode, disable peripherals and go to sleep.
+ * 
+ */
+void goToSleep();
+
+/**
+ * @brief Initialises the MCU and the peripherals and then loop forever.
+ * 
+ * @remarks The function will first do the calibration.
+ *          Then the function will loop forever, until the sleep counter is reached.
+ *          If the button is presses even times, the device is in dice mode.
+ *          If the button is presses odd times, the device is in sprit level mode.
+ *          Every time, a motion is detected or button is pressed, the sleep counter
+ *          will be reset.
+ */
 
 #endif /* MAIN_HPP */

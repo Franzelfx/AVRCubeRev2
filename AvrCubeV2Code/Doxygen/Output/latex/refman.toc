@@ -1,0 +1,58 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}File Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}File List}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}File Documentation}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fabian\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Franz/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Development/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}AVRCube\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Rev2/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Avr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cube\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}V2\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Code/src/main.cpp File Reference}{3}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Detailed Description}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Function Documentation}{5}{subsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.2.1}calibrate()}{5}{subsubsection.2.1.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.2.2}deInit()}{5}{subsubsection.2.1.2.2}%
+\contentsline {subsubsection}{\numberline {2.1.2.3}dice()}{6}{subsubsection.2.1.2.3}%
+\contentsline {subsubsection}{\numberline {2.1.2.4}dynamicDelay()}{6}{subsubsection.2.1.2.4}%
+\contentsline {subsubsection}{\numberline {2.1.2.5}getAcceleration()}{6}{subsubsection.2.1.2.5}%
+\contentsline {subsubsection}{\numberline {2.1.2.6}getAngle()}{6}{subsubsection.2.1.2.6}%
+\contentsline {subsubsection}{\numberline {2.1.2.7}motionDetected()}{7}{subsubsection.2.1.2.7}%
+\contentsline {subsubsection}{\numberline {2.1.2.8}readRegister()}{7}{subsubsection.2.1.2.8}%
+\contentsline {subsubsection}{\numberline {2.1.2.9}rx()}{9}{subsubsection.2.1.2.9}%
+\contentsline {subsubsection}{\numberline {2.1.2.10}setLedPins()}{9}{subsubsection.2.1.2.10}%
+\contentsline {subsubsection}{\numberline {2.1.2.11}setSCL()}{9}{subsubsection.2.1.2.11}%
+\contentsline {subsubsection}{\numberline {2.1.2.12}setSDA()}{10}{subsubsection.2.1.2.12}%
+\contentsline {subsubsection}{\numberline {2.1.2.13}showCross()}{10}{subsubsection.2.1.2.13}%
+\contentsline {subsubsection}{\numberline {2.1.2.14}showHook()}{10}{subsubsection.2.1.2.14}%
+\contentsline {subsubsection}{\numberline {2.1.2.15}showNumber()}{10}{subsubsection.2.1.2.15}%
+\contentsline {subsubsection}{\numberline {2.1.2.16}spritLevel()}{11}{subsubsection.2.1.2.16}%
+\contentsline {subsubsection}{\numberline {2.1.2.17}start()}{11}{subsubsection.2.1.2.17}%
+\contentsline {subsubsection}{\numberline {2.1.2.18}stop()}{11}{subsubsection.2.1.2.18}%
+\contentsline {subsubsection}{\numberline {2.1.2.19}testI2C\_read()}{11}{subsubsection.2.1.2.19}%
+\contentsline {subsubsection}{\numberline {2.1.2.20}testLeds()}{12}{subsubsection.2.1.2.20}%
+\contentsline {subsubsection}{\numberline {2.1.2.21}tx()}{12}{subsubsection.2.1.2.21}%
+\contentsline {subsubsection}{\numberline {2.1.2.22}writeRegister()}{13}{subsubsection.2.1.2.22}%
+\contentsline {subsection}{\numberline {2.1.3}Variable Documentation}{13}{subsection.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.3.1}else}{13}{subsubsection.2.1.3.1}%
+\contentsline {section}{\numberline {2.2}/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fabian\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Franz/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Development/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}AVRCube\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Rev2/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Avr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cube\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}V2\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Code/src/main.hpp File Reference}{13}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Detailed Description}{16}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Function Documentation}{16}{subsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.2.1}calibrate()}{16}{subsubsection.2.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2.2}deInit()}{17}{subsubsection.2.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.2.3}dice()}{17}{subsubsection.2.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.2.4}dynamicDelay()}{17}{subsubsection.2.2.2.4}%
+\contentsline {subsubsection}{\numberline {2.2.2.5}getAcceleration()}{17}{subsubsection.2.2.2.5}%
+\contentsline {subsubsection}{\numberline {2.2.2.6}getAngle()}{18}{subsubsection.2.2.2.6}%
+\contentsline {subsubsection}{\numberline {2.2.2.7}motionDetected()}{18}{subsubsection.2.2.2.7}%
+\contentsline {subsubsection}{\numberline {2.2.2.8}readRegister()}{19}{subsubsection.2.2.2.8}%
+\contentsline {subsubsection}{\numberline {2.2.2.9}rx()}{19}{subsubsection.2.2.2.9}%
+\contentsline {subsubsection}{\numberline {2.2.2.10}setLedPins()}{19}{subsubsection.2.2.2.10}%
+\contentsline {subsubsection}{\numberline {2.2.2.11}setSCL()}{21}{subsubsection.2.2.2.11}%
+\contentsline {subsubsection}{\numberline {2.2.2.12}setSDA()}{21}{subsubsection.2.2.2.12}%
+\contentsline {subsubsection}{\numberline {2.2.2.13}showCross()}{21}{subsubsection.2.2.2.13}%
+\contentsline {subsubsection}{\numberline {2.2.2.14}showHook()}{22}{subsubsection.2.2.2.14}%
+\contentsline {subsubsection}{\numberline {2.2.2.15}showNumber()}{22}{subsubsection.2.2.2.15}%
+\contentsline {subsubsection}{\numberline {2.2.2.16}spritLevel()}{22}{subsubsection.2.2.2.16}%
+\contentsline {subsubsection}{\numberline {2.2.2.17}start()}{22}{subsubsection.2.2.2.17}%
+\contentsline {subsubsection}{\numberline {2.2.2.18}stop()}{23}{subsubsection.2.2.2.18}%
+\contentsline {subsubsection}{\numberline {2.2.2.19}testI2C\_read()}{23}{subsubsection.2.2.2.19}%
+\contentsline {subsubsection}{\numberline {2.2.2.20}testLeds()}{23}{subsubsection.2.2.2.20}%
+\contentsline {subsubsection}{\numberline {2.2.2.21}tx()}{23}{subsubsection.2.2.2.21}%
+\contentsline {subsubsection}{\numberline {2.2.2.22}writeRegister()}{24}{subsubsection.2.2.2.22}%
+\contentsline {section}{\numberline {2.3}main.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{24}{section.2.3}%
+\contentsline {chapter}{Index}{27}{section*.5}%
