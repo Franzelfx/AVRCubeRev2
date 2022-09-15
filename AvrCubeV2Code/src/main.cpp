@@ -1,84 +1,29 @@
-#include <math.h>
-#include <stdlib.h>
-#include <avr/io.h>
-#include <avr/sleep.h>
-#include <util/delay.h>
-#include <avr/interrupt.h>
+/**
+ * @file main.hpp
+ * @author Fabian Franz fabian.franz0596@gmail.com
+ * @brief Implementation of functionality for the "Cube Project".
+ * @version 09.22
+ * @date 2022-09-14
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ * \code
+  ______          _    _                 _                  
+ |  ____|   /\   | |  | |               | |                 
+ | |__     /  \  | |__| |  ______       | | ___ _ __   __ _ 
+ |  __|   / /\ \ |  __  | |______|  _   | |/ _ \ '_ \ / _` |
+ | |____ / ____ \| |  | |          | |__| |  __/ | | | (_| |
+ |______/_/    \_\_|  |_|           \____/ \___|_| |_|\__,_|
+                                                                                                           
+ * \endcode
+ */
 
-// Defines for AVR
-#define F_CPU 8000000
-#define __DELAY_BACKWARD_COMPATIBLE__
-// Defines for the button pin
-#define BUTTON PB2
-// Defines for the connected LEDs
-#define D1 PA0
-#define D2 PA1
-#define D3 PA2
-#define D4 PA3
-#define D5 PA5
-#define D6 PA7
-#define D7 PB1
-// Defines for the SPI interface.
-#define SCK PA4
-#define MISO PA5
-#define MOSI PA6
-// Defines for the I2C interface (no hardware interface).
-#define SCL PA4
-#define SDA PA6
-// Defines for unconnected pins
-#define UNCONNECTED PB0
-
-// General defines
-#define OUTPUT 0
-#define INPUT 1
-#define ENABLE true
-#define DISABLE false
-#define ON true
-#define OFF false
-
-// Defines for control flow
-#define SLEEP_THRESHOLD 60000 // Millieconds until the device go to sleep if no action occurs
-#define FORCE_SLEEP_TIME 6000 // When button is hold this amout of milliseconds the device will go to sleep
-#define ACCELERATION_THRESHOLD 100 // The threshold for the absolute motion value in LSB registers
-#define DICE_STEPS_FIRST_ROUND 5 // The number of steps the dice has to roll
-#define DICE_STEPS_SECOND_ROUND 5 // The number of steps the dice has to roll
-#define DICE_TIME_STEPS 100 // The time step between dice rolls in ms
-#define DICE_TIME_STEPS_INCREASE 10 // The time step increase between dice rolls in ms in secon round
-#define ANGLETHRESHOLD 5 // The threshold for the angle in degrees
-#define CALIBRATION_STEP_DELAY 500 // The delay between calibration steps in ms
-#define OFFSET_CALIBRATION_STEPS 10 // The number of calibration steps
-#define OFFSET_CALIBRATION_STEP_DELAY 10 // The delay between offset calibration steps in ms
-
-// Defines for I2C
-#define I2C_DELAY 10 // 10 us -> 100 kHz
-#define SDA_ON (PORTA |= (1 << SDA))
-#define SDA_OFF (PORTA &= ~(1 << SDA))
-#define SCL_READ (PINA & (1 << SCL))
-#define SDA_READ (PINA & (1 << SDA))
-// Defines for Acceleration Sensor
-#define MMA8653FC_ADD 0x1D
-#define MMA8653FC_ADDR_READ 0x3B
-#define MMA8653FC_ADDR_WRITE 0x3A
-// Defines for Acceleration Sensor Registers
-#define MMA8653FC_WHO_AM_I 0x0D
-#define MMA8653FC_XYZ_DATA_CFG 0x0E
-#define MMA8653FC_CTRL_REG1 0x2A
-#define MMA8653FC_SYSMOD 0x0B
-#define MMA8653FC_OUT_X_MSB 0x01
-#define MMA8653FC_OUT_X_LSB 0x02
-#define MMA8653FC_OUT_Y_MSB 0x03
-#define MMA8653FC_OUT_Y_LSB 0x04
-#define MMA8653FC_OUT_Z_MSB 0x05
-#define MMA8653FC_OUT_Z_LSB 0x06
-#define X_AXIS MMA8653FC_OUT_X_MSB
-#define Y_AXIS MMA8653FC_OUT_Y_MSB
-#define Z_AXIS MMA8653FC_OUT_Z_MSB
+#include "main.hpp"
 
 // Global variable for interrupt.
-volatile uint16_t counter = 0; // Counter for the sleep timer -> max = 65.535
-volatile uint8_t button_pressed = 0;
-// Global variables for sensor offset
-int16_t x_offset, y_offset, z_offset;
+volatile uint16_t counter = 0;        // Counter for the sleep timer. -> max = 65.535
+volatile uint8_t button_pressed = 0;  // Counter for button pressed, to decide if even or odd.
+int16_t x_offset, y_offset, z_offset; // Global variables for sensor offset.
 // #TODO write offset value in sensor registers
 
 // ---------------------------------------------------------------- //
@@ -93,7 +38,7 @@ void setLedPins(uint8_t mode)
     DDRA |= (1 << D1) | (1 << D2) | (1 << D3) | (1 << D4) | (1 << D5) | (1 << D6);
     DDRB |= (1 << D7);
   }
-  else
+  else if (mode == INPUT)
   {
     DDRA &= ~(1 << D1) & ~(1 << D2) & ~(1 << D3) & ~(1 << D4) & ~(1 << D5) & ~(1 << D6);
     DDRB &= ~(1 << D7);
@@ -106,7 +51,7 @@ void setSDA(bool mode) {
     PORTA |= (1 << SDA);
   }
   // If SDA has to be set "off", pin will be driven low
-  else {
+  else if(mode == OFF){
     DDRA |= (1 << SDA);
     PORTA &= ~(1 << SDA);
   }
@@ -133,7 +78,7 @@ void init() {
   OCR0A |= 124;                        // Resulting in ca. 1ms interrupt.
   // Setup external interrupt INT0.
   DDRB &= ~(1 << BUTTON);               // Set the button pin as input.
-  PORTB |= (1 << BUTTON);              // Enable pull-up resistor.
+  PORTB |= (1 << BUTTON);               // Enable pull-up resistor.
   GIMSK |= (1 << INT0);                 // Enable INT0.
   // Set unconnected pin to input pullup
   DDRB &= ~(1 << UNCONNECTED);
@@ -318,6 +263,8 @@ void testI2C_read() {
   }
   else {
     showCross();
+    _delay_ms(SLEEP_THRESHOLD);
+    goToSleep();
   }
 }
 void MMA8653FC_init() {
@@ -341,15 +288,13 @@ void getAcceleration(int16_t* x, int16_t* y, int16_t* z) {
 }
 // Data processing and display
 bool motionDetected(uint8_t threshold) {
-  int8_t abs;
-  int8_t x, y;
-  // Get acceleration with unmasked sign bit
-  x = readRegister(MMA8653FC_OUT_X_MSB);
-  y = readRegister(MMA8653FC_OUT_Y_MSB);
-  x -= x_offset;
-  y -= y_offset;
-  abs = sqrt((float)(x * x + y * y));
-  if (abs > threshold) {
+  int16_t x = 0, y = 0, z = 0, abs;
+  getAcceleration(&x, &y, &z);
+  x = (x - x_offset);
+  y = (y - y_offset);
+  z = (z - z_offset);
+  abs = sqrt(x * x + y * y + z * z);
+  if(abs > threshold) {
     return true;
   }
   else {
@@ -382,8 +327,8 @@ void dice() {
     timeSteps += DICE_TIME_STEPS;
   }
 }
-float getAngle(float axis, float gierAxis) {
-  return (atan(axis / gierAxis) * 4068) / 71; // (radians * 4068) / 71
+float getAngle(float axis, float reference) {
+  return (atan(axis / reference) * 4068) / 71; // (radians * 4068) / 71
 }
 void spritLevel() {
   int16_t x, y, z;
@@ -395,10 +340,11 @@ void spritLevel() {
   x = (x - x_offset);
   y = (y - y_offset);
   if (z == 0)z = 1; // Avoid division by zero
-  z = -abs(z); // Sensor is mounted upside down -> abs cause of tilt > 90°
+  z = -abs(z);      // Sensor is mounted upside down -> abs cause of tilt > 90°
   // The next step is to calculate the angle of the roll and nick
-  roll = getAngle((float)x, (float)z);
-  nick = getAngle((float)y, (float)z);
+  // TODO: better calculation with sqrt(y * y + z * z) and sqrt(x * x + z * z)
+  roll = getAngle((float)x, (float)z_offset); // Not exact but sufficient, precise: sqrt(y * y + z * z) instead of z_offset
+  nick = getAngle((float)y, (float)z_offset);
   // Now we display the anles with the LED'S
   allLedOff();
   // check if the device is balanced
@@ -560,29 +506,26 @@ int main()
 // --------------------------------------------------------------- //
 // -- Interrupts ------------------------------------------------- //
 // --------------------------------------------------------------- //
-ISR(INT0_vect)       // button interrupt
+ISR(INT0_vect) // button interrupt
 {
   uint16_t force_sleep_counter = 0;
-  cli();                          // disable interrupts, to prevent double counting
+  cli(); // disable interrupts, to prevent double counting
   allLedOff();
   button_pressed++;
   while (!(PINB & (1 << BUTTON))) {
-    // increase force sleep counter if button is still pressed
-    force_sleep_counter++;
-    showNumber(force_sleep_counter / 1000);
+    force_sleep_counter++; // increase force sleep counter if button is still pressed
+    showNumber(force_sleep_counter / FORCE_SLEEP_STEPTIME);
     _delay_ms(1);
   }
   if (force_sleep_counter >= FORCE_SLEEP_TIME) {
     goToSleep();
     return;
+  }else{
+    _delay_ms(10); // wait for debounce
   }
-  // as long as button is low
-  {
-    _delay_ms(10);                // wait for debounce
-  }
-  counter = 0;                    // reset counter, cause pressing button is external activity from user
-  sei();                          // enable interrupts again
-  main();                         // reload the main application (causing a mode change from dice to level and vice versa)
+  counter = 0;     // reset counter, cause pressing button is external activity from user
+  sei();           // enable interrupts again
+  main();          // reload the main application (causing a mode change from dice to level and vice versa)
 }
 ISR(TIM0_COMPA_vect) // Sleep timer overflow.
 {

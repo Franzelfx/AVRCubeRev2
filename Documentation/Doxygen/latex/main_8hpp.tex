@@ -1,0 +1,459 @@
+\hypertarget{main_8hpp}{}\doxysection{/\+Users/\+Fabian\+Franz/\+Development/\+Projects/\+AVRCube\+Rev2/\+Avr\+Cube\+V2\+Code/src/main.hpp File Reference}
+\label{main_8hpp}\index{/Users/FabianFranz/Development/Projects/AVRCubeRev2/AvrCubeV2Code/src/main.hpp@{/Users/FabianFranz/Development/Projects/AVRCubeRev2/AvrCubeV2Code/src/main.hpp}}
+
+
+Implementation of functionality for the \char`\"{}\+Cube Project\char`\"{}.  
+
+
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$avr/sleep.\+h$>$}\newline
+{\ttfamily \#include $<$util/delay.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8hpp_a43bafb28b29491ec7f871319b5a3b2f8}\label{main_8hpp_a43bafb28b29491ec7f871319b5a3b2f8}} 
+\#define {\bfseries F\+\_\+\+CPU}~8000000
+\item 
+\mbox{\Hypertarget{main_8hpp_acc47f5f76daffa68710328b70487ef4f}\label{main_8hpp_acc47f5f76daffa68710328b70487ef4f}} 
+\#define {\bfseries \+\_\+\+\_\+\+DELAY\+\_\+\+BACKWARD\+\_\+\+COMPATIBLE\+\_\+\+\_\+}
+\item 
+\mbox{\Hypertarget{main_8hpp_a064af7b2e733862c958d296e7f638c16}\label{main_8hpp_a064af7b2e733862c958d296e7f638c16}} 
+\#define {\bfseries BUTTON}~PB2
+\item 
+\mbox{\Hypertarget{main_8hpp_a52deba56234661c77d4b9573d5175ae2}\label{main_8hpp_a52deba56234661c77d4b9573d5175ae2}} 
+\#define {\bfseries D1}~PA0
+\item 
+\mbox{\Hypertarget{main_8hpp_a7537ecd0f0af6ccc5b85d5df80f4aee7}\label{main_8hpp_a7537ecd0f0af6ccc5b85d5df80f4aee7}} 
+\#define {\bfseries D2}~PA1
+\item 
+\mbox{\Hypertarget{main_8hpp_afea037e4c6e9187610b538bd6a34b8ff}\label{main_8hpp_afea037e4c6e9187610b538bd6a34b8ff}} 
+\#define {\bfseries D3}~PA2
+\item 
+\mbox{\Hypertarget{main_8hpp_a3d9bb178282c3cb69740c94ba1e48fed}\label{main_8hpp_a3d9bb178282c3cb69740c94ba1e48fed}} 
+\#define {\bfseries D4}~PA3
+\item 
+\mbox{\Hypertarget{main_8hpp_a2ddd4183d444d6d128cbdbd6269e4e0c}\label{main_8hpp_a2ddd4183d444d6d128cbdbd6269e4e0c}} 
+\#define {\bfseries D5}~PA5
+\item 
+\mbox{\Hypertarget{main_8hpp_a79a18a7f5ccf7a7ca31f302bd62527a6}\label{main_8hpp_a79a18a7f5ccf7a7ca31f302bd62527a6}} 
+\#define {\bfseries D6}~PA7
+\item 
+\mbox{\Hypertarget{main_8hpp_a2ba78f059a7ebebc95e7beef690e88d6}\label{main_8hpp_a2ba78f059a7ebebc95e7beef690e88d6}} 
+\#define {\bfseries D7}~PB1
+\item 
+\mbox{\Hypertarget{main_8hpp_a2dd443a4430713d325ab86895a4a45eb}\label{main_8hpp_a2dd443a4430713d325ab86895a4a45eb}} 
+\#define {\bfseries SCK}~PA4
+\item 
+\mbox{\Hypertarget{main_8hpp_a7334c540878c8c4d801fd75ed9fd8063}\label{main_8hpp_a7334c540878c8c4d801fd75ed9fd8063}} 
+\#define {\bfseries MISO}~PA5
+\item 
+\mbox{\Hypertarget{main_8hpp_a5d3f11f2fdf8a7e27b975291e0c2c8cc}\label{main_8hpp_a5d3f11f2fdf8a7e27b975291e0c2c8cc}} 
+\#define {\bfseries MOSI}~PA6
+\item 
+\mbox{\Hypertarget{main_8hpp_ab5ffc4751921608954bb7a5687566b2d}\label{main_8hpp_ab5ffc4751921608954bb7a5687566b2d}} 
+\#define {\bfseries SCL}~PA4
+\item 
+\mbox{\Hypertarget{main_8hpp_a6890442e1cc24a0d61597a13576b8727}\label{main_8hpp_a6890442e1cc24a0d61597a13576b8727}} 
+\#define {\bfseries SDA}~PA6
+\item 
+\mbox{\Hypertarget{main_8hpp_ad8ff5a04b8e28d123f3216c0688d5357}\label{main_8hpp_ad8ff5a04b8e28d123f3216c0688d5357}} 
+\#define {\bfseries UNCONNECTED}~PB0
+\item 
+\mbox{\Hypertarget{main_8hpp_a61a3c9a18380aafb6e430e79bf596557}\label{main_8hpp_a61a3c9a18380aafb6e430e79bf596557}} 
+\#define {\bfseries OUTPUT}~0
+\item 
+\mbox{\Hypertarget{main_8hpp_a1bb283bd7893b9855e2f23013891fc82}\label{main_8hpp_a1bb283bd7893b9855e2f23013891fc82}} 
+\#define {\bfseries INPUT}~1
+\item 
+\mbox{\Hypertarget{main_8hpp_a514ad415fb6125ba296793df7d1a468a}\label{main_8hpp_a514ad415fb6125ba296793df7d1a468a}} 
+\#define {\bfseries ENABLE}~true
+\item 
+\mbox{\Hypertarget{main_8hpp_a99496f7308834e8b220f7894efa0b6ab}\label{main_8hpp_a99496f7308834e8b220f7894efa0b6ab}} 
+\#define {\bfseries DISABLE}~false
+\item 
+\mbox{\Hypertarget{main_8hpp_ad76d1750a6cdeebd506bfcd6752554d2}\label{main_8hpp_ad76d1750a6cdeebd506bfcd6752554d2}} 
+\#define {\bfseries ON}~true
+\item 
+\mbox{\Hypertarget{main_8hpp_a29e413f6725b2ba32d165ffaa35b01e5}\label{main_8hpp_a29e413f6725b2ba32d165ffaa35b01e5}} 
+\#define {\bfseries OFF}~false
+\item 
+\mbox{\Hypertarget{main_8hpp_ae8bc99d7e4546e1abdda1b31b3fe122c}\label{main_8hpp_ae8bc99d7e4546e1abdda1b31b3fe122c}} 
+\#define {\bfseries SLEEP\+\_\+\+THRESHOLD}~60000
+\item 
+\mbox{\Hypertarget{main_8hpp_acf75fa6cd2716dc290604564f49cd201}\label{main_8hpp_acf75fa6cd2716dc290604564f49cd201}} 
+\#define {\bfseries ACCELERATION\+\_\+\+THRESHOLD}~100
+\item 
+\mbox{\Hypertarget{main_8hpp_a0c0c7ddece059b641910f7ce6d85f3ef}\label{main_8hpp_a0c0c7ddece059b641910f7ce6d85f3ef}} 
+\#define {\bfseries DICE\+\_\+\+STEPS\+\_\+\+FIRST\+\_\+\+ROUND}~5
+\item 
+\mbox{\Hypertarget{main_8hpp_ad852c94ac521153f05fe98cbcf34d336}\label{main_8hpp_ad852c94ac521153f05fe98cbcf34d336}} 
+\#define {\bfseries DICE\+\_\+\+STEPS\+\_\+\+SECOND\+\_\+\+ROUND}~5
+\item 
+\mbox{\Hypertarget{main_8hpp_a627e01b40a02adffcfdb41166307bb72}\label{main_8hpp_a627e01b40a02adffcfdb41166307bb72}} 
+\#define {\bfseries DICE\+\_\+\+TIME\+\_\+\+STEPS}~100
+\item 
+\mbox{\Hypertarget{main_8hpp_a08338d6eb2ec54e9f1f8bbda060d7e7e}\label{main_8hpp_a08338d6eb2ec54e9f1f8bbda060d7e7e}} 
+\#define {\bfseries DICE\+\_\+\+TIME\+\_\+\+STEPS\+\_\+\+INCREASE}~10
+\item 
+\mbox{\Hypertarget{main_8hpp_a2b16c0cddacbc0da2edd402eff2fde3d}\label{main_8hpp_a2b16c0cddacbc0da2edd402eff2fde3d}} 
+\#define {\bfseries ANGLETHRESHOLD}~5
+\item 
+\mbox{\Hypertarget{main_8hpp_abf4240f7764ff1cb53afd34affc042a9}\label{main_8hpp_abf4240f7764ff1cb53afd34affc042a9}} 
+\#define {\bfseries CALIBRATION\+\_\+\+STEP\+\_\+\+DELAY}~500
+\item 
+\mbox{\Hypertarget{main_8hpp_a1f13ee1ce63e17ed4d4a3c773c04be8e}\label{main_8hpp_a1f13ee1ce63e17ed4d4a3c773c04be8e}} 
+\#define {\bfseries OFFSET\+\_\+\+CALIBRATION\+\_\+\+STEPS}~10
+\item 
+\mbox{\Hypertarget{main_8hpp_ae791f4ee011c7fb021e325b72b363a35}\label{main_8hpp_ae791f4ee011c7fb021e325b72b363a35}} 
+\#define {\bfseries OFFSET\+\_\+\+CALIBRATION\+\_\+\+STEP\+\_\+\+DELAY}~10
+\item 
+\mbox{\Hypertarget{main_8hpp_abfe46a6f3966cbd9b8a654cb39dc731d}\label{main_8hpp_abfe46a6f3966cbd9b8a654cb39dc731d}} 
+\#define {\bfseries FORCE\+\_\+\+SLEEP\+\_\+\+STEPTIME}~500
+\item 
+\mbox{\Hypertarget{main_8hpp_a353adfce4aef234c33460054d6338684}\label{main_8hpp_a353adfce4aef234c33460054d6338684}} 
+\#define {\bfseries FORCE\+\_\+\+SLEEP\+\_\+\+TIME}~6 $\ast$ FORCE\+\_\+\+SLEEP\+\_\+\+STEPTIME
+\item 
+\mbox{\Hypertarget{main_8hpp_afefce7c71a0201a3c53b6f78d57cf66e}\label{main_8hpp_afefce7c71a0201a3c53b6f78d57cf66e}} 
+\#define {\bfseries I2\+C\+\_\+\+DELAY}~10
+\item 
+\mbox{\Hypertarget{main_8hpp_a68357ba1673dfe12178fa90b3a2c70ab}\label{main_8hpp_a68357ba1673dfe12178fa90b3a2c70ab}} 
+\#define {\bfseries SDA\+\_\+\+ON}~(PORTA $\vert$= (1 $<$$<$ SDA))
+\item 
+\mbox{\Hypertarget{main_8hpp_a3c4d2bb72a5302c59962fef9461e3b80}\label{main_8hpp_a3c4d2bb72a5302c59962fef9461e3b80}} 
+\#define {\bfseries SDA\+\_\+\+OFF}~(PORTA \&= $\sim$(1 $<$$<$ SDA))
+\item 
+\mbox{\Hypertarget{main_8hpp_a0cd6da830e25c9ce073251a137574fb7}\label{main_8hpp_a0cd6da830e25c9ce073251a137574fb7}} 
+\#define {\bfseries SCL\+\_\+\+READ}~(PINA \& (1 $<$$<$ SCL))
+\item 
+\mbox{\Hypertarget{main_8hpp_afbf0bc00aaa46c2417e134b855fdae37}\label{main_8hpp_afbf0bc00aaa46c2417e134b855fdae37}} 
+\#define {\bfseries SDA\+\_\+\+READ}~(PINA \& (1 $<$$<$ SDA))
+\item 
+\mbox{\Hypertarget{main_8hpp_a3a5b7f2feaf91e3db0e49975560a92eb}\label{main_8hpp_a3a5b7f2feaf91e3db0e49975560a92eb}} 
+\#define {\bfseries MMA8653\+FC\+\_\+\+ADD}~0x1D
+\item 
+\mbox{\Hypertarget{main_8hpp_a1a692ff5bba731bba48bca0362e9bf17}\label{main_8hpp_a1a692ff5bba731bba48bca0362e9bf17}} 
+\#define {\bfseries MMA8653\+FC\+\_\+\+ADDR\+\_\+\+READ}~0x3B
+\item 
+\mbox{\Hypertarget{main_8hpp_a16363a69f60ff3b8eacf757ff92a50ed}\label{main_8hpp_a16363a69f60ff3b8eacf757ff92a50ed}} 
+\#define {\bfseries MMA8653\+FC\+\_\+\+ADDR\+\_\+\+WRITE}~0x3A
+\item 
+\mbox{\Hypertarget{main_8hpp_aea67b3de1173fa143f69e719cebcb378}\label{main_8hpp_aea67b3de1173fa143f69e719cebcb378}} 
+\#define {\bfseries MMA8653\+FC\+\_\+\+WHO\+\_\+\+AM\+\_\+I}~0x0D
+\item 
+\mbox{\Hypertarget{main_8hpp_a68ff5d17900a2d14b27c273231a3db33}\label{main_8hpp_a68ff5d17900a2d14b27c273231a3db33}} 
+\#define {\bfseries MMA8653\+FC\+\_\+\+XYZ\+\_\+\+DATA\+\_\+\+CFG}~0x0E
+\item 
+\mbox{\Hypertarget{main_8hpp_a5d437f11670dde96f9827ac7462bc537}\label{main_8hpp_a5d437f11670dde96f9827ac7462bc537}} 
+\#define {\bfseries MMA8653\+FC\+\_\+\+CTRL\+\_\+\+REG1}~0x2A
+\item 
+\mbox{\Hypertarget{main_8hpp_a81bead29d788c7491bc558499fe0d7ee}\label{main_8hpp_a81bead29d788c7491bc558499fe0d7ee}} 
+\#define {\bfseries MMA8653\+FC\+\_\+\+SYSMOD}~0x0B
+\item 
+\mbox{\Hypertarget{main_8hpp_aea752e1e6d280e0a0fd662a2a8830934}\label{main_8hpp_aea752e1e6d280e0a0fd662a2a8830934}} 
+\#define {\bfseries MMA8653\+FC\+\_\+\+OUT\+\_\+\+X\+\_\+\+MSB}~0x01
+\item 
+\mbox{\Hypertarget{main_8hpp_a00a28a01f5822112a144ed538524ec7b}\label{main_8hpp_a00a28a01f5822112a144ed538524ec7b}} 
+\#define {\bfseries MMA8653\+FC\+\_\+\+OUT\+\_\+\+X\+\_\+\+LSB}~0x02
+\item 
+\mbox{\Hypertarget{main_8hpp_ace9424205d9f0ab594e5a2b16dcad70b}\label{main_8hpp_ace9424205d9f0ab594e5a2b16dcad70b}} 
+\#define {\bfseries MMA8653\+FC\+\_\+\+OUT\+\_\+\+Y\+\_\+\+MSB}~0x03
+\item 
+\mbox{\Hypertarget{main_8hpp_a1758bbdd5c0413a879ea11bb5c6f0f41}\label{main_8hpp_a1758bbdd5c0413a879ea11bb5c6f0f41}} 
+\#define {\bfseries MMA8653\+FC\+\_\+\+OUT\+\_\+\+Y\+\_\+\+LSB}~0x04
+\item 
+\mbox{\Hypertarget{main_8hpp_a1a0615f2cd1eb170c68ab9dc942a4fa1}\label{main_8hpp_a1a0615f2cd1eb170c68ab9dc942a4fa1}} 
+\#define {\bfseries MMA8653\+FC\+\_\+\+OUT\+\_\+\+Z\+\_\+\+MSB}~0x05
+\item 
+\mbox{\Hypertarget{main_8hpp_ab95a5531dc2fb1b8e9466c2cf1e8e394}\label{main_8hpp_ab95a5531dc2fb1b8e9466c2cf1e8e394}} 
+\#define {\bfseries MMA8653\+FC\+\_\+\+OUT\+\_\+\+Z\+\_\+\+LSB}~0x06
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8hpp_afba8e902a4da30abfe29621fda1cc366}{set\+Led\+Pins}} (uint8\+\_\+t mode)
+\begin{DoxyCompactList}\small\item\em Set the LED Pins eigther \char`\"{}\+INPUT\char`\"{} or \char`\"{}\+OUTPUT\char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_aadd43bc557b310697469aac6bcf5912f}{set\+SDA}} (bool mode)
+\begin{DoxyCompactList}\small\item\em Set the SDA pin eighter \char`\"{}\+ON\char`\"{} or \char`\"{}\+OFF\char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_a33fd27020598179282ed16f419b3f05a}{set\+SCL}} (bool mode)
+\begin{DoxyCompactList}\small\item\em Set the SCL pin eighter \char`\"{}\+ON\char`\"{} or \char`\"{}\+OFF\char`\"{}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8hpp_a02fd73d861ef2e4aabb38c0c9ff82947}\label{main_8hpp_a02fd73d861ef2e4aabb38c0c9ff82947}} 
+void {\bfseries init} ()
+\begin{DoxyCompactList}\small\item\em Initialises all the AVR hardware E.\+g. ports, interrupts, timers, etc. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8hpp_a689062610be46683c09649389dc09673}\label{main_8hpp_a689062610be46683c09649389dc09673}} 
+void {\bfseries all\+Led\+On} ()
+\begin{DoxyCompactList}\small\item\em Turn on all LEDs (LED1 -\/ LED7) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8hpp_a6b33b52bdd4dbad87a5e8508f369def3}\label{main_8hpp_a6b33b52bdd4dbad87a5e8508f369def3}} 
+void {\bfseries all\+Led\+Off} ()
+\begin{DoxyCompactList}\small\item\em Turn off all LEDs (LED1 -\/ LED7) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_a1fab646859e896a35a664b8f609c6d76}{de\+Init}} ()
+\begin{DoxyCompactList}\small\item\em Deeinitialises all the AVR hardware E.\+g. ports, interrupts, timers, etc. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_a19ed45fdb0ad36417435b46fb1b48de9}{show\+Number}} (uint8\+\_\+t number\+To\+Show)
+\begin{DoxyCompactList}\small\item\em Show a number between 1 and 6 on the LEDs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_a9211bc663b471230e12168153dfbc984}{show\+Cross}} ()
+\begin{DoxyCompactList}\small\item\em Show a cross on the LEDs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_a73a9d6515ecc6b702051eb5d9f90369e}{show\+Hook}} ()
+\begin{DoxyCompactList}\small\item\em Show a hook on the LEDs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_a905c049550cebedf53cc88061f7e4b10}{test\+Leds}} ()
+\begin{DoxyCompactList}\small\item\em Check if all LEDs are working correctly. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_a60de64d75454385b23995437f1d72669}{start}} ()
+\begin{DoxyCompactList}\small\item\em I2C Bit\+Bang start condition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_a8c528baf37154d347366083f0f816846}{stop}} ()
+\begin{DoxyCompactList}\small\item\em I2C Bit\+Bang stop condition. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8hpp_aee50f855dff840a3ce9870f6e289365e}{tx}} (uint8\+\_\+t dat)
+\begin{DoxyCompactList}\small\item\em I2C Bit\+Bang tx of one byte. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{main_8hpp_a945deb388e5928de12dd7f6c2181b93a}{rx}} (bool ack)
+\begin{DoxyCompactList}\small\item\em I2C Bit\+Bang rx of one byte. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{main_8hpp_aa6db46255cb370c4b02a204daefb40c2}{read\+Register}} (uint8\+\_\+t reg)
+\begin{DoxyCompactList}\small\item\em Read a register from the MMA8653\+FC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_ad8ba71135cb5de6780571d5711816763}{write\+Register}} (uint8\+\_\+t reg, uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Write a value to a register of the MMA8653\+FC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_af3a3ef29e3e54bf2d1f3cd58a28db141}{test\+I2\+C\+\_\+read}} ()
+\begin{DoxyCompactList}\small\item\em Checks, if the I2C connection to the MMA8653\+FC is working. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of functionality for the \char`\"{}\+Cube Project\char`\"{}. 
+
+Function includes, defines and function prototypes for main.\+cpp.
+
+\begin{DoxyAuthor}{Author}
+Fabian Franz \href{mailto:fabian.franz0596@gmail.com}{\texttt{ fabian.\+franz0596@gmail.\+com}} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+09.\+22 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/09-\/14
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022
+\end{DoxyCopyright}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \_\_\_\_\_\_          \_    \_                 \_                  }
+\DoxyCodeLine{|  \_\_\_\_|   /\(\backslash\)   | |  | |               | |                 }
+\DoxyCodeLine{| |\_\_     /  \(\backslash\)  | |\_\_| |  \_\_\_\_\_\_       | | \_\_\_ \_ \_\_   \_\_ \_ }
+\DoxyCodeLine{|  \_\_|   / /\(\backslash\) \(\backslash\) |  \_\_  | |\_\_\_\_\_\_|  \_   | |/ \_ \(\backslash\) \textcolor{stringliteral}{'\_ \(\backslash\) / \_` |}}
+\DoxyCodeLine{\textcolor{stringliteral}{| |\_\_\_\_ / \_\_\_\_ \(\backslash\)| |  | |          | |\_\_| |  \_\_/ | | | (\_| |}}
+\DoxyCodeLine{\textcolor{stringliteral}{|\_\_\_\_\_\_/\_/    \(\backslash\)\_\(\backslash\)\_|  |\_|           \(\backslash\)\_\_\_\_/ \(\backslash\)\_\_\_|\_| |\_|\(\backslash\)\_\_,\_|}}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8hpp_a1fab646859e896a35a664b8f609c6d76}\label{main_8hpp_a1fab646859e896a35a664b8f609c6d76}} 
+\index{main.hpp@{main.hpp}!deInit@{deInit}}
+\index{deInit@{deInit}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{deInit()}{deInit()}}
+{\footnotesize\ttfamily void de\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Deeinitialises all the AVR hardware E.\+g. ports, interrupts, timers, etc. 
+
+\begin{DoxyRemark}{Remarks}
+Calling \mbox{\hyperlink{main_8hpp_a1fab646859e896a35a664b8f609c6d76}{de\+Init()}}; is necessary to save power before the CPU goes to sleep. 
+\end{DoxyRemark}
+\mbox{\Hypertarget{main_8hpp_aa6db46255cb370c4b02a204daefb40c2}\label{main_8hpp_aa6db46255cb370c4b02a204daefb40c2}} 
+\index{main.hpp@{main.hpp}!readRegister@{readRegister}}
+\index{readRegister@{readRegister}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{readRegister()}{readRegister()}}
+{\footnotesize\ttfamily uint8\+\_\+t read\+Register (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{reg }\end{DoxyParamCaption})}
+
+
+
+Read a register from the MMA8653\+FC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & The register to read.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value of the register. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8hpp_a945deb388e5928de12dd7f6c2181b93a}\label{main_8hpp_a945deb388e5928de12dd7f6c2181b93a}} 
+\index{main.hpp@{main.hpp}!rx@{rx}}
+\index{rx@{rx}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{rx()}{rx()}}
+{\footnotesize\ttfamily uint8\+\_\+t rx (\begin{DoxyParamCaption}\item[{bool}]{ack }\end{DoxyParamCaption})}
+
+
+
+I2C Bit\+Bang rx of one byte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ack} & ACK or NACK (acknowledge or no acknowledge)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The received byte. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8hpp_afba8e902a4da30abfe29621fda1cc366}\label{main_8hpp_afba8e902a4da30abfe29621fda1cc366}} 
+\index{main.hpp@{main.hpp}!setLedPins@{setLedPins}}
+\index{setLedPins@{setLedPins}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{setLedPins()}{setLedPins()}}
+{\footnotesize\ttfamily void set\+Led\+Pins (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{mode }\end{DoxyParamCaption})}
+
+
+
+Set the LED Pins eigther \char`\"{}\+INPUT\char`\"{} or \char`\"{}\+OUTPUT\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & OUTPUT = 0 or INPUT = 1 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8hpp_a33fd27020598179282ed16f419b3f05a}\label{main_8hpp_a33fd27020598179282ed16f419b3f05a}} 
+\index{main.hpp@{main.hpp}!setSCL@{setSCL}}
+\index{setSCL@{setSCL}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{setSCL()}{setSCL()}}
+{\footnotesize\ttfamily void set\+SCL (\begin{DoxyParamCaption}\item[{bool}]{mode }\end{DoxyParamCaption})}
+
+
+
+Set the SCL pin eighter \char`\"{}\+ON\char`\"{} or \char`\"{}\+OFF\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & \char`\"{}\+ON\char`\"{} (input pullup) or \char`\"{}\+OFF\char`\"{} (output low) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8hpp_aadd43bc557b310697469aac6bcf5912f}\label{main_8hpp_aadd43bc557b310697469aac6bcf5912f}} 
+\index{main.hpp@{main.hpp}!setSDA@{setSDA}}
+\index{setSDA@{setSDA}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{setSDA()}{setSDA()}}
+{\footnotesize\ttfamily void set\+SDA (\begin{DoxyParamCaption}\item[{bool}]{mode }\end{DoxyParamCaption})}
+
+
+
+Set the SDA pin eighter \char`\"{}\+ON\char`\"{} or \char`\"{}\+OFF\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & \char`\"{}\+ON\char`\"{} (input pullup) or \char`\"{}\+OFF\char`\"{} (output low) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8hpp_a9211bc663b471230e12168153dfbc984}\label{main_8hpp_a9211bc663b471230e12168153dfbc984}} 
+\index{main.hpp@{main.hpp}!showCross@{showCross}}
+\index{showCross@{showCross}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{showCross()}{showCross()}}
+{\footnotesize\ttfamily void show\+Cross (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Show a cross on the LEDs. 
+
+\begin{DoxyRemark}{Remarks}
+This function is used to indicate some error. 
+\end{DoxyRemark}
+\mbox{\Hypertarget{main_8hpp_a73a9d6515ecc6b702051eb5d9f90369e}\label{main_8hpp_a73a9d6515ecc6b702051eb5d9f90369e}} 
+\index{main.hpp@{main.hpp}!showHook@{showHook}}
+\index{showHook@{showHook}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{showHook()}{showHook()}}
+{\footnotesize\ttfamily void show\+Hook (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Show a hook on the LEDs. 
+
+\begin{DoxyRemark}{Remarks}
+This function is used to indicate some success. 
+\end{DoxyRemark}
+\mbox{\Hypertarget{main_8hpp_a19ed45fdb0ad36417435b46fb1b48de9}\label{main_8hpp_a19ed45fdb0ad36417435b46fb1b48de9}} 
+\index{main.hpp@{main.hpp}!showNumber@{showNumber}}
+\index{showNumber@{showNumber}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{showNumber()}{showNumber()}}
+{\footnotesize\ttfamily void show\+Number (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{number\+To\+Show }\end{DoxyParamCaption})}
+
+
+
+Show a number between 1 and 6 on the LEDs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em number\+Toshow} & The number to show on the LEDs.\\
+\hline
+\end{DoxyParams}
+Lremark If the number is larger than 6, no LED will be turned on. \mbox{\Hypertarget{main_8hpp_a60de64d75454385b23995437f1d72669}\label{main_8hpp_a60de64d75454385b23995437f1d72669}} 
+\index{main.hpp@{main.hpp}!start@{start}}
+\index{start@{start}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily void start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+I2C Bit\+Bang start condition. 
+
+\mbox{\Hypertarget{main_8hpp_a8c528baf37154d347366083f0f816846}\label{main_8hpp_a8c528baf37154d347366083f0f816846}} 
+\index{main.hpp@{main.hpp}!stop@{stop}}
+\index{stop@{stop}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily void stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+I2C Bit\+Bang stop condition. 
+
+\mbox{\Hypertarget{main_8hpp_af3a3ef29e3e54bf2d1f3cd58a28db141}\label{main_8hpp_af3a3ef29e3e54bf2d1f3cd58a28db141}} 
+\index{main.hpp@{main.hpp}!testI2C\_read@{testI2C\_read}}
+\index{testI2C\_read@{testI2C\_read}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{testI2C\_read()}{testI2C\_read()}}
+{\footnotesize\ttfamily void test\+I2\+C\+\_\+read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Checks, if the I2C connection to the MMA8653\+FC is working. 
+
+\begin{DoxyRemark}{Remarks}
+If the communication is not working, it will be shown on the LEDs as a cross. Furthermore, the device will go to sleep. 
+\end{DoxyRemark}
+\mbox{\Hypertarget{main_8hpp_a905c049550cebedf53cc88061f7e4b10}\label{main_8hpp_a905c049550cebedf53cc88061f7e4b10}} 
+\index{main.hpp@{main.hpp}!testLeds@{testLeds}}
+\index{testLeds@{testLeds}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{testLeds()}{testLeds()}}
+{\footnotesize\ttfamily void test\+Leds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Check if all LEDs are working correctly. 
+
+\mbox{\Hypertarget{main_8hpp_aee50f855dff840a3ce9870f6e289365e}\label{main_8hpp_aee50f855dff840a3ce9870f6e289365e}} 
+\index{main.hpp@{main.hpp}!tx@{tx}}
+\index{tx@{tx}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{tx()}{tx()}}
+{\footnotesize\ttfamily bool tx (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{dat }\end{DoxyParamCaption})}
+
+
+
+I2C Bit\+Bang tx of one byte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dat} & The byte to send.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ACK or NACK (acknowledge or no acknowledge) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8hpp_ad8ba71135cb5de6780571d5711816763}\label{main_8hpp_ad8ba71135cb5de6780571d5711816763}} 
+\index{main.hpp@{main.hpp}!writeRegister@{writeRegister}}
+\index{writeRegister@{writeRegister}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{writeRegister()}{writeRegister()}}
+{\footnotesize\ttfamily void write\+Register (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{reg,  }\item[{uint8\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+
+
+Write a value to a register of the MMA8653\+FC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & The register to write. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,113 @@
+\hypertarget{main_8hpp_source}{}\doxysection{main.\+hpp}
+\label{main_8hpp_source}\index{/Users/FabianFranz/Development/Projects/AVRCubeRev2/AvrCubeV2Code/src/main.hpp@{/Users/FabianFranz/Development/Projects/AVRCubeRev2/AvrCubeV2Code/src/main.hpp}}
+\mbox{\hyperlink{main_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#ifndef MAIN\_HPP}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define MAIN\_HPP}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
+\DoxyCodeLine{25 \textcolor{comment}{// -\/-\/ Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
+\DoxyCodeLine{26 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include <avr/io.h>}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <avr/sleep.h>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <util/delay.h>}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include <avr/interrupt.h>}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
+\DoxyCodeLine{35 \textcolor{comment}{// -\/-\/ Defines -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
+\DoxyCodeLine{36 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#define F\_CPU 8000000}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#define \_\_DELAY\_BACKWARD\_COMPATIBLE\_\_}}
+\DoxyCodeLine{39 \textcolor{comment}{// Defines for the button pin}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define BUTTON PB2}}
+\DoxyCodeLine{41 \textcolor{comment}{// Defines for the connected LEDs}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define D1 PA0}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#define D2 PA1}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define D3 PA2}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#define D4 PA3}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#define D5 PA5}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#define D6 PA7}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define D7 PB1}}
+\DoxyCodeLine{49 \textcolor{comment}{// Defines for the SPI interface.}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#define SCK PA4}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#define MISO PA5}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#define MOSI PA6}}
+\DoxyCodeLine{53 \textcolor{comment}{// Defines for the I2C interface (no hardware interface).}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#define SCL PA4}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#define SDA PA6}}
+\DoxyCodeLine{56 \textcolor{comment}{// Defines for unconnected pins}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#define UNCONNECTED PB0}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{comment}{// General defines}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#define OUTPUT 0}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#define INPUT 1}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#define ENABLE true}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#define DISABLE false}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#define ON true}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#define OFF false}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{comment}{// Defines for control flow}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#define SLEEP\_THRESHOLD 60000       }\textcolor{comment}{// Millieconds until the device go to sleep if no action occurs}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#define ACCELERATION\_THRESHOLD 100  }\textcolor{comment}{// The threshold for the absolute motion value in LSB registers}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#define DICE\_STEPS\_FIRST\_ROUND 5    }\textcolor{comment}{// The number of steps the dice has to roll}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#define DICE\_STEPS\_SECOND\_ROUND 5   }\textcolor{comment}{// The number of steps the dice has to roll}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#define DICE\_TIME\_STEPS 100         }\textcolor{comment}{// The time step between dice rolls in ms}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#define DICE\_TIME\_STEPS\_INCREASE 10 }\textcolor{comment}{// The time step increase between dice rolls in ms in secon round}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#define ANGLETHRESHOLD 5            }\textcolor{comment}{// The threshold for the angle in degrees}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#define CALIBRATION\_STEP\_DELAY 500  }\textcolor{comment}{// The delay between calibration steps in ms}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#define OFFSET\_CALIBRATION\_STEPS 10      }\textcolor{comment}{// The number of calibration steps}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#define OFFSET\_CALIBRATION\_STEP\_DELAY 10 }\textcolor{comment}{// The delay between offset calibration steps in ms}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#define FORCE\_SLEEP\_STEPTIME 500         }\textcolor{comment}{// The delay until new number}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#define FORCE\_SLEEP\_TIME 6 * FORCE\_SLEEP\_STEPTIME }\textcolor{comment}{// When button is hold this amout of milliseconds the device will go to sleep}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{comment}{// Defines for I2C}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#define I2C\_DELAY 10 }\textcolor{comment}{// 10 us -\/> 100 kHz}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#define SDA\_ON (PORTA |= (1 << SDA))}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#define SDA\_OFF (PORTA \&= \string~(1 << SDA))}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#define SCL\_READ (PINA \& (1 << SCL))}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#define SDA\_READ (PINA \& (1 << SDA))}}
+\DoxyCodeLine{87 \textcolor{comment}{// Defines for Acceleration Sensor}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#define MMA8653FC\_ADD 0x1D}}
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#define MMA8653FC\_ADDR\_READ 0x3B}}
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#define MMA8653FC\_ADDR\_WRITE 0x3A}}
+\DoxyCodeLine{91 \textcolor{comment}{// Defines for Acceleration Sensor Registers}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#define MMA8653FC\_WHO\_AM\_I 0x0D}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#define MMA8653FC\_XYZ\_DATA\_CFG 0x0E}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#define MMA8653FC\_CTRL\_REG1 0x2A}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#define MMA8653FC\_SYSMOD 0x0B    }\textcolor{comment}{// System Mode, to control STANDBY, WAKE and SLEEP}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_X\_MSB 0x01 }\textcolor{comment}{// Most significant byte of X-\/axis acceleration data}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_X\_LSB 0x02 }\textcolor{comment}{// Least significant byte of X-\/axis acceleration data}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_Y\_MSB 0x03 }\textcolor{comment}{// Most significant byte of Y-\/axis acceleration data}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_Y\_LSB 0x04 }\textcolor{comment}{// Least significant byte of Y-\/axis acceleration data}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_Z\_MSB 0x05 }\textcolor{comment}{// Most significant byte of Z-\/axis acceleration data}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_Z\_LSB 0x06 }\textcolor{comment}{// Least significant byte of Z-\/axis acceleration data}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
+\DoxyCodeLine{104 \textcolor{comment}{// -\/-\/ Function Prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
+\DoxyCodeLine{105 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
+\DoxyCodeLine{111 \textcolor{comment}{}\textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_afba8e902a4da30abfe29621fda1cc366}{setLedPins}}(uint8\_t mode);}
+\DoxyCodeLine{117 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_aadd43bc557b310697469aac6bcf5912f}{setSDA}}(\textcolor{keywordtype}{bool} mode);}
+\DoxyCodeLine{123 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a33fd27020598179282ed16f419b3f05a}{setSCL}}(\textcolor{keywordtype}{bool} mode);}
+\DoxyCodeLine{127 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a02fd73d861ef2e4aabb38c0c9ff82947}{init}}();}
+\DoxyCodeLine{132 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a689062610be46683c09649389dc09673}{allLedOn}}();}
+\DoxyCodeLine{136 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a6b33b52bdd4dbad87a5e8508f369def3}{allLedOff}}();}
+\DoxyCodeLine{142 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a1fab646859e896a35a664b8f609c6d76}{deInit}}();}
+\DoxyCodeLine{150 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a19ed45fdb0ad36417435b46fb1b48de9}{showNumber}}(uint8\_t numberToShow);}
+\DoxyCodeLine{156 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a9211bc663b471230e12168153dfbc984}{showCross}}();}
+\DoxyCodeLine{162 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a73a9d6515ecc6b702051eb5d9f90369e}{showHook}}();}
+\DoxyCodeLine{167 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a905c049550cebedf53cc88061f7e4b10}{testLeds}}();}
+\DoxyCodeLine{172 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a60de64d75454385b23995437f1d72669}{start}}();}
+\DoxyCodeLine{177 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a8c528baf37154d347366083f0f816846}{stop}}();}
+\DoxyCodeLine{185 \textcolor{keywordtype}{bool} \mbox{\hyperlink{main_8hpp_aee50f855dff840a3ce9870f6e289365e}{tx}}(uint8\_t dat);}
+\DoxyCodeLine{193 uint8\_t \mbox{\hyperlink{main_8hpp_a945deb388e5928de12dd7f6c2181b93a}{rx}}(\textcolor{keywordtype}{bool} ack);}
+\DoxyCodeLine{201 uint8\_t \mbox{\hyperlink{main_8hpp_aa6db46255cb370c4b02a204daefb40c2}{readRegister}}(uint8\_t reg);}
+\DoxyCodeLine{208 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_ad8ba71135cb5de6780571d5711816763}{writeRegister}}(uint8\_t reg, uint8\_t value);}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{217 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_af3a3ef29e3e54bf2d1f3cd58a28db141}{testI2C\_read}}();}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* MAIN\_HPP */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}
