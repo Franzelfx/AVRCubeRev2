@@ -3,38 +3,47 @@
   \item {/Users/FabianFranz/Development/Projects/AVRCubeRev2/AvrCubeV2Code/src/main.cpp}, 
 		\hyperpage{3}
   \item {/Users/FabianFranz/Development/Projects/AVRCubeRev2/AvrCubeV2Code/src/main.hpp}, 
-		\hyperpage{13}, \hyperpage{24}
+		\hyperpage{12}, \hyperpage{22}
 
   \indexspace
 
   \item {calibrate}
     \subitem {main.cpp}, \hyperpage{5}
-    \subitem {main.hpp}, \hyperpage{16}
+    \subitem {main.hpp}, \hyperpage{15}
 
   \indexspace
 
   \item {deInit}
     \subitem {main.cpp}, \hyperpage{5}
-    \subitem {main.hpp}, \hyperpage{16}
+    \subitem {main.hpp}, \hyperpage{15}
   \item {dice}
     \subitem {main.cpp}, \hyperpage{5}
-    \subitem {main.hpp}, \hyperpage{17}
+    \subitem {main.hpp}, \hyperpage{16}
   \item {dynamicDelay}
     \subitem {main.cpp}, \hyperpage{6}
-    \subitem {main.hpp}, \hyperpage{17}
+    \subitem {main.hpp}, \hyperpage{16}
 
   \indexspace
 
   \item {else}
-    \subitem {main.cpp}, \hyperpage{13}
+    \subitem {main.cpp}, \hyperpage{12}
 
   \indexspace
 
   \item {getAcceleration}
     \subitem {main.cpp}, \hyperpage{6}
-    \subitem {main.hpp}, \hyperpage{17}
+    \subitem {main.hpp}, \hyperpage{16}
   \item {getAngle}
     \subitem {main.cpp}, \hyperpage{6}
+    \subitem {main.hpp}, \hyperpage{17}
+  \item {getGradient}
+    \subitem {main.cpp}, \hyperpage{7}
+    \subitem {main.hpp}, \hyperpage{17}
+  \item {getRollNick}
+    \subitem {main.cpp}, \hyperpage{7}
+    \subitem {main.hpp}, \hyperpage{18}
+  \item {goToSleep}
+    \subitem {main.cpp}, \hyperpage{8}
     \subitem {main.hpp}, \hyperpage{18}
 
   \indexspace
@@ -44,15 +53,18 @@
     \subitem {deInit}, \hyperpage{5}
     \subitem {dice}, \hyperpage{5}
     \subitem {dynamicDelay}, \hyperpage{6}
-    \subitem {else}, \hyperpage{13}
+    \subitem {else}, \hyperpage{12}
     \subitem {getAcceleration}, \hyperpage{6}
     \subitem {getAngle}, \hyperpage{6}
-    \subitem {motionDetected}, \hyperpage{7}
-    \subitem {readRegister}, \hyperpage{7}
+    \subitem {getGradient}, \hyperpage{7}
+    \subitem {getRollNick}, \hyperpage{7}
+    \subitem {goToSleep}, \hyperpage{8}
+    \subitem {motionDetected}, \hyperpage{8}
+    \subitem {readRegister}, \hyperpage{8}
     \subitem {rx}, \hyperpage{9}
     \subitem {setLedPins}, \hyperpage{9}
     \subitem {setSCL}, \hyperpage{9}
-    \subitem {setSDA}, \hyperpage{10}
+    \subitem {setSDA}, \hyperpage{9}
     \subitem {showCross}, \hyperpage{10}
     \subitem {showHook}, \hyperpage{10}
     \subitem {showNumber}, \hyperpage{10}
@@ -61,39 +73,42 @@
     \subitem {stop}, \hyperpage{11}
     \subitem {testI2C\_read}, \hyperpage{11}
     \subitem {testLeds}, \hyperpage{11}
-    \subitem {tx}, \hyperpage{12}
-    \subitem {writeRegister}, \hyperpage{13}
+    \subitem {tx}, \hyperpage{11}
+    \subitem {writeRegister}, \hyperpage{12}
   \item {main.hpp}
-    \subitem {calibrate}, \hyperpage{16}
-    \subitem {deInit}, \hyperpage{16}
-    \subitem {dice}, \hyperpage{17}
-    \subitem {dynamicDelay}, \hyperpage{17}
-    \subitem {getAcceleration}, \hyperpage{17}
-    \subitem {getAngle}, \hyperpage{18}
+    \subitem {calibrate}, \hyperpage{15}
+    \subitem {deInit}, \hyperpage{15}
+    \subitem {dice}, \hyperpage{16}
+    \subitem {dynamicDelay}, \hyperpage{16}
+    \subitem {getAcceleration}, \hyperpage{16}
+    \subitem {getAngle}, \hyperpage{17}
+    \subitem {getGradient}, \hyperpage{17}
+    \subitem {getRollNick}, \hyperpage{18}
+    \subitem {goToSleep}, \hyperpage{18}
     \subitem {motionDetected}, \hyperpage{18}
     \subitem {readRegister}, \hyperpage{19}
     \subitem {rx}, \hyperpage{19}
     \subitem {setLedPins}, \hyperpage{19}
-    \subitem {setSCL}, \hyperpage{21}
-    \subitem {setSDA}, \hyperpage{21}
-    \subitem {showCross}, \hyperpage{21}
-    \subitem {showHook}, \hyperpage{21}
-    \subitem {showNumber}, \hyperpage{22}
-    \subitem {spritLevel}, \hyperpage{22}
-    \subitem {start}, \hyperpage{22}
-    \subitem {stop}, \hyperpage{22}
-    \subitem {testI2C\_read}, \hyperpage{23}
-    \subitem {testLeds}, \hyperpage{23}
-    \subitem {tx}, \hyperpage{23}
-    \subitem {writeRegister}, \hyperpage{23}
+    \subitem {setSCL}, \hyperpage{20}
+    \subitem {setSDA}, \hyperpage{20}
+    \subitem {showCross}, \hyperpage{20}
+    \subitem {showHook}, \hyperpage{20}
+    \subitem {showNumber}, \hyperpage{20}
+    \subitem {spritLevel}, \hyperpage{21}
+    \subitem {start}, \hyperpage{21}
+    \subitem {stop}, \hyperpage{21}
+    \subitem {testI2C\_read}, \hyperpage{21}
+    \subitem {testLeds}, \hyperpage{21}
+    \subitem {tx}, \hyperpage{22}
+    \subitem {writeRegister}, \hyperpage{22}
   \item {motionDetected}
-    \subitem {main.cpp}, \hyperpage{7}
+    \subitem {main.cpp}, \hyperpage{8}
     \subitem {main.hpp}, \hyperpage{18}
 
   \indexspace
 
   \item {readRegister}
-    \subitem {main.cpp}, \hyperpage{7}
+    \subitem {main.cpp}, \hyperpage{8}
     \subitem {main.hpp}, \hyperpage{19}
   \item {rx}
     \subitem {main.cpp}, \hyperpage{9}
@@ -106,45 +121,45 @@
     \subitem {main.hpp}, \hyperpage{19}
   \item {setSCL}
     \subitem {main.cpp}, \hyperpage{9}
-    \subitem {main.hpp}, \hyperpage{21}
+    \subitem {main.hpp}, \hyperpage{20}
   \item {setSDA}
-    \subitem {main.cpp}, \hyperpage{10}
-    \subitem {main.hpp}, \hyperpage{21}
+    \subitem {main.cpp}, \hyperpage{9}
+    \subitem {main.hpp}, \hyperpage{20}
   \item {showCross}
     \subitem {main.cpp}, \hyperpage{10}
-    \subitem {main.hpp}, \hyperpage{21}
+    \subitem {main.hpp}, \hyperpage{20}
   \item {showHook}
     \subitem {main.cpp}, \hyperpage{10}
-    \subitem {main.hpp}, \hyperpage{21}
+    \subitem {main.hpp}, \hyperpage{20}
   \item {showNumber}
     \subitem {main.cpp}, \hyperpage{10}
-    \subitem {main.hpp}, \hyperpage{22}
+    \subitem {main.hpp}, \hyperpage{20}
   \item {spritLevel}
     \subitem {main.cpp}, \hyperpage{11}
-    \subitem {main.hpp}, \hyperpage{22}
+    \subitem {main.hpp}, \hyperpage{21}
   \item {start}
     \subitem {main.cpp}, \hyperpage{11}
-    \subitem {main.hpp}, \hyperpage{22}
+    \subitem {main.hpp}, \hyperpage{21}
   \item {stop}
     \subitem {main.cpp}, \hyperpage{11}
-    \subitem {main.hpp}, \hyperpage{22}
+    \subitem {main.hpp}, \hyperpage{21}
 
   \indexspace
 
   \item {testI2C\_read}
     \subitem {main.cpp}, \hyperpage{11}
-    \subitem {main.hpp}, \hyperpage{23}
+    \subitem {main.hpp}, \hyperpage{21}
   \item {testLeds}
     \subitem {main.cpp}, \hyperpage{11}
-    \subitem {main.hpp}, \hyperpage{23}
+    \subitem {main.hpp}, \hyperpage{21}
   \item {tx}
-    \subitem {main.cpp}, \hyperpage{12}
-    \subitem {main.hpp}, \hyperpage{23}
+    \subitem {main.cpp}, \hyperpage{11}
+    \subitem {main.hpp}, \hyperpage{22}
 
   \indexspace
 
   \item {writeRegister}
-    \subitem {main.cpp}, \hyperpage{13}
-    \subitem {main.hpp}, \hyperpage{23}
+    \subitem {main.cpp}, \hyperpage{12}
+    \subitem {main.hpp}, \hyperpage{22}
 
 \end{theindex}

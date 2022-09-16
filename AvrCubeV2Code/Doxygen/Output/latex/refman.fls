@@ -287,9 +287,7 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/helvetic/phvb8r.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/helvetic/phvr8c.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/helvetic/phvro8t.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/helvetic/phvro8r.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/helvetic/phvro8c.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/helvetic/phvb8tn.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/helvetic/phvro8c.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/helvetic/phvr8t.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/courier/pcrr8t.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/helvetic/phvb8tn.vf

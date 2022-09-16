@@ -258,16 +258,6 @@ void MMA8653FC_deInit();
 void getAcceleration(int16_t* x, int16_t* y, int16_t* z);
 
 /**
- * @brief Get's true, if the device is in motion and threshold is reached.
- * 
- * @param threshold Activation threshold in bit.
- * 
- * @return true if threshold is reached.
- */
-
-void getAcceleration(int16_t* x, int16_t* y, int16_t* z, uint8_t repetitions);
-
-/**
  * @brief Implemetation of a variable delay.
  * 
  * @param ms The time you want the core to not execute any code.
@@ -300,13 +290,29 @@ void dynamicDelay(uint16_t ms);
  */
 float getAngle(float axis, float reference);
 
-// TODO: add documentation
+/**
+ * @brief Get the roll and ncik angle from the x, y, z acceleration.
+ * 
+ * @param roll The roll angle the get (call by reference).
+ * @param nick The nick angle the get (call by reference).
+ */
 void getRollNick(float* roll, float* nick);
 
-//TODO: add documentation
+/**
+ * @brief Get the Gradient from the current values and the last value.
+ * 
+ * @param baseValue The currently measured value.
+ * @return int16_t The gradient of the current value and the last value.
+ */
 int16_t getGradient(int16_t baseValue);
 
-//TODO: add documentation
+/**
+ * @brief Return true or false, depending on the threshold.
+ * 
+ * @param threshold The amount of angle which has to change in one 
+ *                  to get the function to return true.
+ * @return True if the threshold is reached, false if not.
+ */
 bool motionDetected(uint8_t threshold);
 
 /**

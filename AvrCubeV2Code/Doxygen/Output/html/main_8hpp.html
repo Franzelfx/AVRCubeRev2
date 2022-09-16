@@ -162,9 +162,9 @@ Macros</h2></td></tr>
 <tr class="memitem:ae8bc99d7e4546e1abdda1b31b3fe122c"><td class="memItemLeft" align="right" valign="top"><a id="ae8bc99d7e4546e1abdda1b31b3fe122c" name="ae8bc99d7e4546e1abdda1b31b3fe122c"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>SLEEP_THRESHOLD</b>&#160;&#160;&#160;60000</td></tr>
 <tr class="separator:ae8bc99d7e4546e1abdda1b31b3fe122c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf75fa6cd2716dc290604564f49cd201"><td class="memItemLeft" align="right" valign="top"><a id="acf75fa6cd2716dc290604564f49cd201" name="acf75fa6cd2716dc290604564f49cd201"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ACCELERATION_THRESHOLD</b>&#160;&#160;&#160;100</td></tr>
-<tr class="separator:acf75fa6cd2716dc290604564f49cd201"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a196ae849a7d43e3eda03c2f91657b219"><td class="memItemLeft" align="right" valign="top"><a id="a196ae849a7d43e3eda03c2f91657b219" name="a196ae849a7d43e3eda03c2f91657b219"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ANGLE_GRADIENT_THRESHOLD</b>&#160;&#160;&#160;25</td></tr>
+<tr class="separator:a196ae849a7d43e3eda03c2f91657b219"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c0c7ddece059b641910f7ce6d85f3ef"><td class="memItemLeft" align="right" valign="top"><a id="a0c0c7ddece059b641910f7ce6d85f3ef" name="a0c0c7ddece059b641910f7ce6d85f3ef"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>DICE_STEPS_FIRST_ROUND</b>&#160;&#160;&#160;5</td></tr>
 <tr class="separator:a0c0c7ddece059b641910f7ce6d85f3ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,7 +178,7 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>DICE_TIME_STEPS_INCREASE</b>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:a08338d6eb2ec54e9f1f8bbda060d7e7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b16c0cddacbc0da2edd402eff2fde3d"><td class="memItemLeft" align="right" valign="top"><a id="a2b16c0cddacbc0da2edd402eff2fde3d" name="a2b16c0cddacbc0da2edd402eff2fde3d"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ANGLETHRESHOLD</b>&#160;&#160;&#160;5</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ANGLETHRESHOLD</b>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a2b16c0cddacbc0da2edd402eff2fde3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf4240f7764ff1cb53afd34affc042a9"><td class="memItemLeft" align="right" valign="top"><a id="abf4240f7764ff1cb53afd34affc042a9" name="abf4240f7764ff1cb53afd34affc042a9"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>CALIBRATION_STEP_DELAY</b>&#160;&#160;&#160;500</td></tr>
@@ -195,6 +195,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a353adfce4aef234c33460054d6338684"><td class="memItemLeft" align="right" valign="top"><a id="a353adfce4aef234c33460054d6338684" name="a353adfce4aef234c33460054d6338684"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>FORCE_SLEEP_TIME</b>&#160;&#160;&#160;6 * FORCE_SLEEP_STEPTIME</td></tr>
 <tr class="separator:a353adfce4aef234c33460054d6338684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab26da47d326ea4f7d44fd10e3e937224"><td class="memItemLeft" align="right" valign="top"><a id="ab26da47d326ea4f7d44fd10e3e937224" name="ab26da47d326ea4f7d44fd10e3e937224"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MOTION_MEASURING_REPETITIONS</b>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:ab26da47d326ea4f7d44fd10e3e937224"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afefce7c71a0201a3c53b6f78d57cf66e"><td class="memItemLeft" align="right" valign="top"><a id="afefce7c71a0201a3c53b6f78d57cf66e" name="afefce7c71a0201a3c53b6f78d57cf66e"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>I2C_DELAY</b>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:afefce7c71a0201a3c53b6f78d57cf66e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -320,24 +323,33 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>MMA8653FC_deInit</b> 
 <tr class="memitem:ae2a0877a530ab4eead989e572435144e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8hpp.html#ae2a0877a530ab4eead989e572435144e">getAcceleration</a> (int16_t *x, int16_t *y, int16_t *z)</td></tr>
 <tr class="memdesc:ae2a0877a530ab4eead989e572435144e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the acceleration data from the MMA8653FC.  <a href="main_8hpp.html#ae2a0877a530ab4eead989e572435144e">More...</a><br /></td></tr>
 <tr class="separator:ae2a0877a530ab4eead989e572435144e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04cb44f56b022b414f1c79a12aa04593"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8hpp.html#a04cb44f56b022b414f1c79a12aa04593">motionDetected</a> (uint8_t threshold)</td></tr>
-<tr class="memdesc:a04cb44f56b022b414f1c79a12aa04593"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get's true, if the device is in motion and threshold is reached.  <a href="main_8hpp.html#a04cb44f56b022b414f1c79a12aa04593">More...</a><br /></td></tr>
-<tr class="separator:a04cb44f56b022b414f1c79a12aa04593"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9920ab102e90b7f53bfde9446b7c60c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8hpp.html#a9920ab102e90b7f53bfde9446b7c60c2">dynamicDelay</a> (uint16_t ms)</td></tr>
 <tr class="memdesc:a9920ab102e90b7f53bfde9446b7c60c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implemetation of a variable delay.  <a href="main_8hpp.html#a9920ab102e90b7f53bfde9446b7c60c2">More...</a><br /></td></tr>
 <tr class="separator:a9920ab102e90b7f53bfde9446b7c60c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7eb3c763899937d00b615725c044482"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8hpp.html#af7eb3c763899937d00b615725c044482">dice</a> ()</td></tr>
-<tr class="memdesc:af7eb3c763899937d00b615725c044482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Realises a random number from 1 - 6 and show it on the LEDs.  <a href="main_8hpp.html#af7eb3c763899937d00b615725c044482">More...</a><br /></td></tr>
-<tr class="separator:af7eb3c763899937d00b615725c044482"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaecc05df0106098c3f4b8628eaf8c180"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8hpp.html#aaecc05df0106098c3f4b8628eaf8c180">getAngle</a> (float axis, float reference)</td></tr>
 <tr class="memdesc:aaecc05df0106098c3f4b8628eaf8c180"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Angle between two acceleration values.  <a href="main_8hpp.html#aaecc05df0106098c3f4b8628eaf8c180">More...</a><br /></td></tr>
 <tr class="separator:aaecc05df0106098c3f4b8628eaf8c180"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88d02ddcf1143a629d01408b9af83fe7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8hpp.html#a88d02ddcf1143a629d01408b9af83fe7">getRollNick</a> (float *roll, float *nick)</td></tr>
+<tr class="memdesc:a88d02ddcf1143a629d01408b9af83fe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the roll and ncik angle from the x, y, z acceleration.  <a href="main_8hpp.html#a88d02ddcf1143a629d01408b9af83fe7">More...</a><br /></td></tr>
+<tr class="separator:a88d02ddcf1143a629d01408b9af83fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3248e2729810c7e31ce761d16f34e0f"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8hpp.html#af3248e2729810c7e31ce761d16f34e0f">getGradient</a> (int16_t baseValue)</td></tr>
+<tr class="memdesc:af3248e2729810c7e31ce761d16f34e0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Gradient from the current values and the last value.  <a href="main_8hpp.html#af3248e2729810c7e31ce761d16f34e0f">More...</a><br /></td></tr>
+<tr class="separator:af3248e2729810c7e31ce761d16f34e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04cb44f56b022b414f1c79a12aa04593"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8hpp.html#a04cb44f56b022b414f1c79a12aa04593">motionDetected</a> (uint8_t threshold)</td></tr>
+<tr class="memdesc:a04cb44f56b022b414f1c79a12aa04593"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true or false, depending on the threshold.  <a href="main_8hpp.html#a04cb44f56b022b414f1c79a12aa04593">More...</a><br /></td></tr>
+<tr class="separator:a04cb44f56b022b414f1c79a12aa04593"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc89088f52dd8ba8b6cf388b8b08dfbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8hpp.html#afc89088f52dd8ba8b6cf388b8b08dfbe">spritLevel</a> ()</td></tr>
 <tr class="memdesc:afc89088f52dd8ba8b6cf388b8b08dfbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows the sprit level on the LEDs.  <a href="main_8hpp.html#afc89088f52dd8ba8b6cf388b8b08dfbe">More...</a><br /></td></tr>
 <tr class="separator:afc89088f52dd8ba8b6cf388b8b08dfbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7eb3c763899937d00b615725c044482"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8hpp.html#af7eb3c763899937d00b615725c044482">dice</a> ()</td></tr>
+<tr class="memdesc:af7eb3c763899937d00b615725c044482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Realises a random number from 1 - 6 and show it on the LEDs.  <a href="main_8hpp.html#af7eb3c763899937d00b615725c044482">More...</a><br /></td></tr>
+<tr class="separator:af7eb3c763899937d00b615725c044482"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4a7316a51b17d0f691bb3e33b95a5ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8hpp.html#ad4a7316a51b17d0f691bb3e33b95a5ad">calibrate</a> ()</td></tr>
 <tr class="memdesc:ad4a7316a51b17d0f691bb3e33b95a5ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Short calibration of the MMA8653FC values.  <a href="main_8hpp.html#ad4a7316a51b17d0f691bb3e33b95a5ad">More...</a><br /></td></tr>
 <tr class="separator:ad4a7316a51b17d0f691bb3e33b95a5ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2da94e03570cd696d5e1ef31169b6f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8hpp.html#ae2da94e03570cd696d5e1ef31169b6f3">goToSleep</a> ()</td></tr>
+<tr class="memdesc:ae2da94e03570cd696d5e1ef31169b6f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sleep mode, disable peripherals and go to sleep.  <a href="main_8hpp.html#ae2da94e03570cd696d5e1ef31169b6f3">More...</a><br /></td></tr>
+<tr class="separator:ae2da94e03570cd696d5e1ef31169b6f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Includes, defines and function prototypes for the "Cube Project". </p>
@@ -525,11 +537,94 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>MMA8653FC_deInit</b> 
 <li>Calculate the amount of motion on those axis where the acceleration doesn't change significantly. E.g.: <div class="fragment"><div class="line">amount = sqrt(y * y + z * z); </div>
 </div><!-- fragment --></li>
 <li>Calculate the angle between the amount of motion and the acceleration value of the axis where the amount of motion is changing. E.g.: <div class="fragment"><div class="line">angle = <a class="code hl_function" href="main_8cpp.html#aaecc05df0106098c3f4b8628eaf8c180">getAngle</a>(x, amount); </div>
-<div class="ttc" id="amain_8cpp_html_aaecc05df0106098c3f4b8628eaf8c180"><div class="ttname"><a href="main_8cpp.html#aaecc05df0106098c3f4b8628eaf8c180">getAngle</a></div><div class="ttdeci">float getAngle(float axis, float reference)</div><div class="ttdoc">Get the Angle between two acceleration values.</div><div class="ttdef"><b>Definition:</b> main.cpp:330</div></div>
+<div class="ttc" id="amain_8cpp_html_aaecc05df0106098c3f4b8628eaf8c180"><div class="ttname"><a href="main_8cpp.html#aaecc05df0106098c3f4b8628eaf8c180">getAngle</a></div><div class="ttdeci">float getAngle(float axis, float reference)</div><div class="ttdoc">Get the Angle between two acceleration values.</div><div class="ttdef"><b>Definition:</b> main.cpp:294</div></div>
 </div><!-- fragment --></li>
 <li>Use the angle to calculate the rotation of the device. For further information read: <a href="https://www.nxp.com/docs/en/application-note/AN3461.pdf">https://www.nxp.com/docs/en/application-note/AN3461.pdf</a> </li>
 </ol>
 </dd></dl>
+
+</div>
+</div>
+<a id="af3248e2729810c7e31ce761d16f34e0f" name="af3248e2729810c7e31ce761d16f34e0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3248e2729810c7e31ce761d16f34e0f">&#9670;&#160;</a></span>getGradient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t getGradient </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>baseValue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Gradient from the current values and the last value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">baseValue</td><td>The currently measured value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int16_t The gradient of the current value and the last value. </dd></dl>
+
+</div>
+</div>
+<a id="a88d02ddcf1143a629d01408b9af83fe7" name="a88d02ddcf1143a629d01408b9af83fe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88d02ddcf1143a629d01408b9af83fe7">&#9670;&#160;</a></span>getRollNick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void getRollNick </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>roll</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>nick</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the roll and ncik angle from the x, y, z acceleration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">roll</td><td>The roll angle the get (call by reference). </td></tr>
+    <tr><td class="paramname">nick</td><td>The nick angle the get (call by reference). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae2da94e03570cd696d5e1ef31169b6f3" name="ae2da94e03570cd696d5e1ef31169b6f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2da94e03570cd696d5e1ef31169b6f3">&#9670;&#160;</a></span>goToSleep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void goToSleep </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the sleep mode, disable peripherals and go to sleep. </p>
 
 </div>
 </div>
@@ -549,14 +644,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>MMA8653FC_deInit</b> 
       </table>
 </div><div class="memdoc">
 
-<p>Get's true, if the device is in motion and threshold is reached. </p>
+<p>Return true or false, depending on the threshold. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">threshold</td><td>Activation threshold in bit.</td></tr>
+    <tr><td class="paramname">threshold</td><td>The amount of angle which has to change in one to get the function to return true. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if threshold is reached. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the threshold is reached, false if not. </dd></dl>
 
 </div>
 </div>

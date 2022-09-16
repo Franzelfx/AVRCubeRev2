@@ -83,8 +83,8 @@ Includes, defines and function prototypes for the \char`\"{}\+Cube Project\char`
 \mbox{\Hypertarget{main_8hpp_ae8bc99d7e4546e1abdda1b31b3fe122c}\label{main_8hpp_ae8bc99d7e4546e1abdda1b31b3fe122c}} 
 \#define {\bfseries SLEEP\+\_\+\+THRESHOLD}~60000
 \item 
-\mbox{\Hypertarget{main_8hpp_acf75fa6cd2716dc290604564f49cd201}\label{main_8hpp_acf75fa6cd2716dc290604564f49cd201}} 
-\#define {\bfseries ACCELERATION\+\_\+\+THRESHOLD}~100
+\mbox{\Hypertarget{main_8hpp_a196ae849a7d43e3eda03c2f91657b219}\label{main_8hpp_a196ae849a7d43e3eda03c2f91657b219}} 
+\#define {\bfseries ANGLE\+\_\+\+GRADIENT\+\_\+\+THRESHOLD}~25
 \item 
 \mbox{\Hypertarget{main_8hpp_a0c0c7ddece059b641910f7ce6d85f3ef}\label{main_8hpp_a0c0c7ddece059b641910f7ce6d85f3ef}} 
 \#define {\bfseries DICE\+\_\+\+STEPS\+\_\+\+FIRST\+\_\+\+ROUND}~5
@@ -99,7 +99,7 @@ Includes, defines and function prototypes for the \char`\"{}\+Cube Project\char`
 \#define {\bfseries DICE\+\_\+\+TIME\+\_\+\+STEPS\+\_\+\+INCREASE}~10
 \item 
 \mbox{\Hypertarget{main_8hpp_a2b16c0cddacbc0da2edd402eff2fde3d}\label{main_8hpp_a2b16c0cddacbc0da2edd402eff2fde3d}} 
-\#define {\bfseries ANGLETHRESHOLD}~5
+\#define {\bfseries ANGLETHRESHOLD}~1
 \item 
 \mbox{\Hypertarget{main_8hpp_abf4240f7764ff1cb53afd34affc042a9}\label{main_8hpp_abf4240f7764ff1cb53afd34affc042a9}} 
 \#define {\bfseries CALIBRATION\+\_\+\+STEP\+\_\+\+DELAY}~500
@@ -115,6 +115,9 @@ Includes, defines and function prototypes for the \char`\"{}\+Cube Project\char`
 \item 
 \mbox{\Hypertarget{main_8hpp_a353adfce4aef234c33460054d6338684}\label{main_8hpp_a353adfce4aef234c33460054d6338684}} 
 \#define {\bfseries FORCE\+\_\+\+SLEEP\+\_\+\+TIME}~6 $\ast$ FORCE\+\_\+\+SLEEP\+\_\+\+STEPTIME
+\item 
+\mbox{\Hypertarget{main_8hpp_ab26da47d326ea4f7d44fd10e3e937224}\label{main_8hpp_ab26da47d326ea4f7d44fd10e3e937224}} 
+\#define {\bfseries MOTION\+\_\+\+MEASURING\+\_\+\+REPETITIONS}~5
 \item 
 \mbox{\Hypertarget{main_8hpp_afefce7c71a0201a3c53b6f78d57cf66e}\label{main_8hpp_afefce7c71a0201a3c53b6f78d57cf66e}} 
 \#define {\bfseries I2\+C\+\_\+\+DELAY}~10
@@ -220,18 +223,24 @@ void {\bfseries MMA8653\+FC\+\_\+de\+Init} ()
 \begin{DoxyCompactList}\small\item\em Deinitialise the MMA8653\+FC to safe energy. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8hpp_ae2a0877a530ab4eead989e572435144e}{get\+Acceleration}} (int16\+\_\+t $\ast$x, int16\+\_\+t $\ast$y, int16\+\_\+t $\ast$z)
 \begin{DoxyCompactList}\small\item\em Read the acceleration data from the MMA8653\+FC. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{main_8hpp_a04cb44f56b022b414f1c79a12aa04593}{motion\+Detected}} (uint8\+\_\+t threshold)
-\begin{DoxyCompactList}\small\item\em Get\textquotesingle{}s true, if the device is in motion and threshold is reached. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8hpp_a9920ab102e90b7f53bfde9446b7c60c2}{dynamic\+Delay}} (uint16\+\_\+t ms)
 \begin{DoxyCompactList}\small\item\em Implemetation of a variable delay. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{main_8hpp_af7eb3c763899937d00b615725c044482}{dice}} ()
-\begin{DoxyCompactList}\small\item\em Realises a random number from 1 -\/ 6 and show it on the LEDs. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{main_8hpp_aaecc05df0106098c3f4b8628eaf8c180}{get\+Angle}} (float axis, float reference)
 \begin{DoxyCompactList}\small\item\em Get the Angle between two acceleration values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_a88d02ddcf1143a629d01408b9af83fe7}{get\+Roll\+Nick}} (float $\ast$roll, float $\ast$nick)
+\begin{DoxyCompactList}\small\item\em Get the roll and ncik angle from the x, y, z acceleration. \end{DoxyCompactList}\item 
+int16\+\_\+t \mbox{\hyperlink{main_8hpp_af3248e2729810c7e31ce761d16f34e0f}{get\+Gradient}} (int16\+\_\+t base\+Value)
+\begin{DoxyCompactList}\small\item\em Get the Gradient from the current values and the last value. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8hpp_a04cb44f56b022b414f1c79a12aa04593}{motion\+Detected}} (uint8\+\_\+t threshold)
+\begin{DoxyCompactList}\small\item\em Return true or false, depending on the threshold. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8hpp_afc89088f52dd8ba8b6cf388b8b08dfbe}{sprit\+Level}} ()
 \begin{DoxyCompactList}\small\item\em Shows the sprit level on the LEDs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_af7eb3c763899937d00b615725c044482}{dice}} ()
+\begin{DoxyCompactList}\small\item\em Realises a random number from 1 -\/ 6 and show it on the LEDs. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8hpp_ad4a7316a51b17d0f691bb3e33b95a5ad}{calibrate}} ()
-\begin{DoxyCompactList}\small\item\em Short calibration of the MMA8653\+FC values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Short calibration of the MMA8653\+FC values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8hpp_ae2da94e03570cd696d5e1ef31169b6f3}{go\+To\+Sleep}} ()
+\begin{DoxyCompactList}\small\item\em Set the sleep mode, disable peripherals and go to sleep. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -381,6 +390,51 @@ The function is used to calculate the angle between a reference acceleration val
 \item Use the angle to calculate the rotation of the device. For further information read\+: \href{https://www.nxp.com/docs/en/application-note/AN3461.pdf}{\texttt{ https\+://www.\+nxp.\+com/docs/en/application-\/note/\+AN3461.\+pdf}} 
 \end{DoxyEnumerate}
 \end{DoxyRemark}
+\mbox{\Hypertarget{main_8hpp_af3248e2729810c7e31ce761d16f34e0f}\label{main_8hpp_af3248e2729810c7e31ce761d16f34e0f}} 
+\index{main.hpp@{main.hpp}!getGradient@{getGradient}}
+\index{getGradient@{getGradient}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{getGradient()}{getGradient()}}
+{\footnotesize\ttfamily int16\+\_\+t get\+Gradient (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{base\+Value }\end{DoxyParamCaption})}
+
+
+
+Get the Gradient from the current values and the last value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+Value} & The currently measured value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int16\+\_\+t The gradient of the current value and the last value. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8hpp_a88d02ddcf1143a629d01408b9af83fe7}\label{main_8hpp_a88d02ddcf1143a629d01408b9af83fe7}} 
+\index{main.hpp@{main.hpp}!getRollNick@{getRollNick}}
+\index{getRollNick@{getRollNick}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{getRollNick()}{getRollNick()}}
+{\footnotesize\ttfamily void get\+Roll\+Nick (\begin{DoxyParamCaption}\item[{float $\ast$}]{roll,  }\item[{float $\ast$}]{nick }\end{DoxyParamCaption})}
+
+
+
+Get the roll and ncik angle from the x, y, z acceleration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em roll} & The roll angle the get (call by reference). \\
+\hline
+{\em nick} & The nick angle the get (call by reference). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8hpp_ae2da94e03570cd696d5e1ef31169b6f3}\label{main_8hpp_ae2da94e03570cd696d5e1ef31169b6f3}} 
+\index{main.hpp@{main.hpp}!goToSleep@{goToSleep}}
+\index{goToSleep@{goToSleep}!main.hpp@{main.hpp}}
+\doxysubsubsection{\texorpdfstring{goToSleep()}{goToSleep()}}
+{\footnotesize\ttfamily void go\+To\+Sleep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set the sleep mode, disable peripherals and go to sleep. 
+
 \mbox{\Hypertarget{main_8hpp_a04cb44f56b022b414f1c79a12aa04593}\label{main_8hpp_a04cb44f56b022b414f1c79a12aa04593}} 
 \index{main.hpp@{main.hpp}!motionDetected@{motionDetected}}
 \index{motionDetected@{motionDetected}!main.hpp@{main.hpp}}
@@ -389,15 +443,15 @@ The function is used to calculate the angle between a reference acceleration val
 
 
 
-Get\textquotesingle{}s true, if the device is in motion and threshold is reached. 
+Return true or false, depending on the threshold. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em threshold} & Activation threshold in bit.\\
+{\em threshold} & The amount of angle which has to change in one to get the function to return true. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-true if threshold is reached. 
+True if the threshold is reached, false if not. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{main_8hpp_aa6db46255cb370c4b02a204daefb40c2}\label{main_8hpp_aa6db46255cb370c4b02a204daefb40c2}} 
 \index{main.hpp@{main.hpp}!readRegister@{readRegister}}

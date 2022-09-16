@@ -50,97 +50,104 @@
 \DoxyCodeLine{65 \textcolor{preprocessor}{\#define OFF false}}
 \DoxyCodeLine{66 }
 \DoxyCodeLine{67 \textcolor{comment}{// Defines for control flow}}
-\DoxyCodeLine{68 \textcolor{preprocessor}{\#define SLEEP\_THRESHOLD 60000       }\textcolor{comment}{// Millieconds until the device go to sleep if no action occurs}}
-\DoxyCodeLine{69 \textcolor{preprocessor}{\#define ACCELERATION\_THRESHOLD 100  }\textcolor{comment}{// The threshold for the absolute motion value in LSB registers}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#define SLEEP\_THRESHOLD 60000                 }\textcolor{comment}{// Millieconds until the device go to sleep if no action occurs}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#define ANGLE\_GRADIENT\_THRESHOLD 25  }\textcolor{comment}{// The threshold for the absolute motion value in LSB registers}}
 \DoxyCodeLine{70 \textcolor{preprocessor}{\#define DICE\_STEPS\_FIRST\_ROUND 5    }\textcolor{comment}{// The number of steps the dice has to roll}}
 \DoxyCodeLine{71 \textcolor{preprocessor}{\#define DICE\_STEPS\_SECOND\_ROUND 5   }\textcolor{comment}{// The number of steps the dice has to roll}}
 \DoxyCodeLine{72 \textcolor{preprocessor}{\#define DICE\_TIME\_STEPS 100         }\textcolor{comment}{// The time step between dice rolls in ms}}
 \DoxyCodeLine{73 \textcolor{preprocessor}{\#define DICE\_TIME\_STEPS\_INCREASE 10 }\textcolor{comment}{// The time step increase between dice rolls in ms in secon round}}
-\DoxyCodeLine{74 \textcolor{preprocessor}{\#define ANGLETHRESHOLD 5            }\textcolor{comment}{// The threshold for the angle in degrees}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#define ANGLETHRESHOLD 1            }\textcolor{comment}{// The threshold for the angle in degrees}}
 \DoxyCodeLine{75 \textcolor{preprocessor}{\#define CALIBRATION\_STEP\_DELAY 500  }\textcolor{comment}{// The delay between calibration steps in ms}}
 \DoxyCodeLine{76 \textcolor{preprocessor}{\#define OFFSET\_CALIBRATION\_STEPS 10      }\textcolor{comment}{// The number of calibration steps}}
 \DoxyCodeLine{77 \textcolor{preprocessor}{\#define OFFSET\_CALIBRATION\_STEP\_DELAY 10 }\textcolor{comment}{// The delay between offset calibration steps in ms}}
 \DoxyCodeLine{78 \textcolor{preprocessor}{\#define FORCE\_SLEEP\_STEPTIME 500         }\textcolor{comment}{// The delay until new number}}
 \DoxyCodeLine{79 \textcolor{preprocessor}{\#define FORCE\_SLEEP\_TIME 6 * FORCE\_SLEEP\_STEPTIME }\textcolor{comment}{// When button is hold this amout of milliseconds the device will go to sleep}}
-\DoxyCodeLine{80 }
-\DoxyCodeLine{81 \textcolor{comment}{// Defines for I2C}}
-\DoxyCodeLine{82 \textcolor{preprocessor}{\#define I2C\_DELAY 10 }\textcolor{comment}{// 10 us -\/> 100 kHz}}
-\DoxyCodeLine{83 \textcolor{preprocessor}{\#define SDA\_ON (PORTA |= (1 << SDA))}}
-\DoxyCodeLine{84 \textcolor{preprocessor}{\#define SDA\_OFF (PORTA \&= \string~(1 << SDA))}}
-\DoxyCodeLine{85 \textcolor{preprocessor}{\#define SCL\_READ (PINA \& (1 << SCL))}}
-\DoxyCodeLine{86 \textcolor{preprocessor}{\#define SDA\_READ (PINA \& (1 << SDA))}}
-\DoxyCodeLine{87 \textcolor{comment}{// Defines for Acceleration Sensor}}
-\DoxyCodeLine{88 \textcolor{preprocessor}{\#define MMA8653FC\_ADD 0x1D}}
-\DoxyCodeLine{89 \textcolor{preprocessor}{\#define MMA8653FC\_ADDR\_READ 0x3B}}
-\DoxyCodeLine{90 \textcolor{preprocessor}{\#define MMA8653FC\_ADDR\_WRITE 0x3A}}
-\DoxyCodeLine{91 \textcolor{comment}{// Defines for Acceleration Sensor Registers}}
-\DoxyCodeLine{92 \textcolor{preprocessor}{\#define MMA8653FC\_WHO\_AM\_I 0x0D}}
-\DoxyCodeLine{93 \textcolor{preprocessor}{\#define MMA8653FC\_XYZ\_DATA\_CFG 0x0E}}
-\DoxyCodeLine{94 \textcolor{preprocessor}{\#define MMA8653FC\_CTRL\_REG1 0x2A}}
-\DoxyCodeLine{95 \textcolor{preprocessor}{\#define MMA8653FC\_SYSMOD 0x0B    }\textcolor{comment}{// System Mode, to control STANDBY, WAKE and SLEEP}}
-\DoxyCodeLine{96 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_X\_MSB 0x01 }\textcolor{comment}{// Most significant byte of X-\/axis acceleration data}}
-\DoxyCodeLine{97 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_X\_LSB 0x02 }\textcolor{comment}{// Least significant byte of X-\/axis acceleration data}}
-\DoxyCodeLine{98 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_Y\_MSB 0x03 }\textcolor{comment}{// Most significant byte of Y-\/axis acceleration data}}
-\DoxyCodeLine{99 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_Y\_LSB 0x04 }\textcolor{comment}{// Least significant byte of Y-\/axis acceleration data}}
-\DoxyCodeLine{100 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_Z\_MSB 0x05 }\textcolor{comment}{// Most significant byte of Z-\/axis acceleration data}}
-\DoxyCodeLine{101 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_Z\_LSB 0x06 }\textcolor{comment}{// Least significant byte of Z-\/axis acceleration data}}
-\DoxyCodeLine{102 }
-\DoxyCodeLine{103 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
-\DoxyCodeLine{104 \textcolor{comment}{// -\/-\/ Function Prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
-\DoxyCodeLine{105 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
-\DoxyCodeLine{111 \textcolor{comment}{}\textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_afba8e902a4da30abfe29621fda1cc366}{setLedPins}}(uint8\_t mode);}
-\DoxyCodeLine{112 }
-\DoxyCodeLine{118 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_aadd43bc557b310697469aac6bcf5912f}{setSDA}}(\textcolor{keywordtype}{bool} mode);}
-\DoxyCodeLine{119 }
-\DoxyCodeLine{125 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a33fd27020598179282ed16f419b3f05a}{setSCL}}(\textcolor{keywordtype}{bool} mode);}
-\DoxyCodeLine{126 }
-\DoxyCodeLine{130 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a02fd73d861ef2e4aabb38c0c9ff82947}{init}}();}
-\DoxyCodeLine{131 }
-\DoxyCodeLine{136 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a689062610be46683c09649389dc09673}{allLedOn}}();}
-\DoxyCodeLine{137 }
-\DoxyCodeLine{141 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a6b33b52bdd4dbad87a5e8508f369def3}{allLedOff}}();}
-\DoxyCodeLine{142 }
-\DoxyCodeLine{148 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a1fab646859e896a35a664b8f609c6d76}{deInit}}();}
-\DoxyCodeLine{149 }
-\DoxyCodeLine{157 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a19ed45fdb0ad36417435b46fb1b48de9}{showNumber}}(uint8\_t numberToShow);}
-\DoxyCodeLine{163 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a9211bc663b471230e12168153dfbc984}{showCross}}();}
-\DoxyCodeLine{164 }
-\DoxyCodeLine{170 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a73a9d6515ecc6b702051eb5d9f90369e}{showHook}}();}
-\DoxyCodeLine{171 }
-\DoxyCodeLine{176 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a905c049550cebedf53cc88061f7e4b10}{testLeds}}();}
-\DoxyCodeLine{177 }
-\DoxyCodeLine{182 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a60de64d75454385b23995437f1d72669}{start}}();}
-\DoxyCodeLine{183 }
-\DoxyCodeLine{188 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a8c528baf37154d347366083f0f816846}{stop}}();}
-\DoxyCodeLine{189 }
-\DoxyCodeLine{197 \textcolor{keywordtype}{bool} \mbox{\hyperlink{main_8hpp_aee50f855dff840a3ce9870f6e289365e}{tx}}(uint8\_t dat);}
-\DoxyCodeLine{198 }
-\DoxyCodeLine{206 uint8\_t \mbox{\hyperlink{main_8hpp_a945deb388e5928de12dd7f6c2181b93a}{rx}}(\textcolor{keywordtype}{bool} ack);}
-\DoxyCodeLine{207 }
-\DoxyCodeLine{215 uint8\_t \mbox{\hyperlink{main_8hpp_aa6db46255cb370c4b02a204daefb40c2}{readRegister}}(uint8\_t reg);}
-\DoxyCodeLine{216 }
-\DoxyCodeLine{223 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_ad8ba71135cb5de6780571d5711816763}{writeRegister}}(uint8\_t reg, uint8\_t value);}
-\DoxyCodeLine{224 }
-\DoxyCodeLine{232 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_af3a3ef29e3e54bf2d1f3cd58a28db141}{testI2C\_read}}();}
-\DoxyCodeLine{233 }
-\DoxyCodeLine{237 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_ab0ec380bbe8e09a3fd0b30c626735211}{MMA8653FC\_init}}();}
-\DoxyCodeLine{238 }
-\DoxyCodeLine{242 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a7d6f235ac035b0e4642ed46e27e70b58}{MMA8653FC\_deInit}}();}
-\DoxyCodeLine{243 }
-\DoxyCodeLine{257 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_ae2a0877a530ab4eead989e572435144e}{getAcceleration}}(int16\_t* x, int16\_t* y, int16\_t* z);}
-\DoxyCodeLine{258 }
-\DoxyCodeLine{266 \textcolor{keywordtype}{bool} \mbox{\hyperlink{main_8hpp_a04cb44f56b022b414f1c79a12aa04593}{motionDetected}}(uint8\_t threshold);}
-\DoxyCodeLine{267 }
-\DoxyCodeLine{273 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a9920ab102e90b7f53bfde9446b7c60c2}{dynamicDelay}}(uint16\_t ms);}
-\DoxyCodeLine{274 }
-\DoxyCodeLine{283 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_af7eb3c763899937d00b615725c044482}{dice}}();}
-\DoxyCodeLine{284 }
-\DoxyCodeLine{309 \textcolor{keywordtype}{float} \mbox{\hyperlink{main_8hpp_aaecc05df0106098c3f4b8628eaf8c180}{getAngle}}(\textcolor{keywordtype}{float} axis, \textcolor{keywordtype}{float} reference);}
-\DoxyCodeLine{310 }
-\DoxyCodeLine{321 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_afc89088f52dd8ba8b6cf388b8b08dfbe}{spritLevel}}();}
-\DoxyCodeLine{322 }
-\DoxyCodeLine{335 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_ad4a7316a51b17d0f691bb3e33b95a5ad}{calibrate}}();}
-\DoxyCodeLine{336 }
-\DoxyCodeLine{337 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* MAIN\_HPP */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#define MOTION\_MEASURING\_REPETITIONS 5 }\textcolor{comment}{// The number of repetitions for the motion measuring}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{comment}{// Defines for I2C}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#define I2C\_DELAY 10 }\textcolor{comment}{// 10 us -\/> 100 kHz}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#define SDA\_ON (PORTA |= (1 << SDA))}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#define SDA\_OFF (PORTA \&= \string~(1 << SDA))}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#define SCL\_READ (PINA \& (1 << SCL))}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#define SDA\_READ (PINA \& (1 << SDA))}}
+\DoxyCodeLine{88 \textcolor{comment}{// Defines for Acceleration Sensor}}
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#define MMA8653FC\_ADD 0x1D}}
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#define MMA8653FC\_ADDR\_READ 0x3B}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#define MMA8653FC\_ADDR\_WRITE 0x3A}}
+\DoxyCodeLine{92 \textcolor{comment}{// Defines for Acceleration Sensor Registers}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#define MMA8653FC\_WHO\_AM\_I 0x0D}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#define MMA8653FC\_XYZ\_DATA\_CFG 0x0E}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#define MMA8653FC\_CTRL\_REG1 0x2A}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#define MMA8653FC\_SYSMOD 0x0B    }\textcolor{comment}{// System Mode, to control STANDBY, WAKE and SLEEP}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_X\_MSB 0x01 }\textcolor{comment}{// Most significant byte of X-\/axis acceleration data}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_X\_LSB 0x02 }\textcolor{comment}{// Least significant byte of X-\/axis acceleration data}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_Y\_MSB 0x03 }\textcolor{comment}{// Most significant byte of Y-\/axis acceleration data}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_Y\_LSB 0x04 }\textcolor{comment}{// Least significant byte of Y-\/axis acceleration data}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_Z\_MSB 0x05 }\textcolor{comment}{// Most significant byte of Z-\/axis acceleration data}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#define MMA8653FC\_OUT\_Z\_LSB 0x06 }\textcolor{comment}{// Least significant byte of Z-\/axis acceleration data}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
+\DoxyCodeLine{105 \textcolor{comment}{// -\/-\/ Function Prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
+\DoxyCodeLine{106 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ //}}
+\DoxyCodeLine{112 \textcolor{comment}{}\textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_afba8e902a4da30abfe29621fda1cc366}{setLedPins}}(uint8\_t mode);}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{119 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_aadd43bc557b310697469aac6bcf5912f}{setSDA}}(\textcolor{keywordtype}{bool} mode);}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{126 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a33fd27020598179282ed16f419b3f05a}{setSCL}}(\textcolor{keywordtype}{bool} mode);}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{131 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a02fd73d861ef2e4aabb38c0c9ff82947}{init}}();}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{137 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a689062610be46683c09649389dc09673}{allLedOn}}();}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{142 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a6b33b52bdd4dbad87a5e8508f369def3}{allLedOff}}();}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{149 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a1fab646859e896a35a664b8f609c6d76}{deInit}}();}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{158 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a19ed45fdb0ad36417435b46fb1b48de9}{showNumber}}(uint8\_t numberToShow);}
+\DoxyCodeLine{164 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a9211bc663b471230e12168153dfbc984}{showCross}}();}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{171 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a73a9d6515ecc6b702051eb5d9f90369e}{showHook}}();}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{177 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a905c049550cebedf53cc88061f7e4b10}{testLeds}}();}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{183 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a60de64d75454385b23995437f1d72669}{start}}();}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{189 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a8c528baf37154d347366083f0f816846}{stop}}();}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{198 \textcolor{keywordtype}{bool} \mbox{\hyperlink{main_8hpp_aee50f855dff840a3ce9870f6e289365e}{tx}}(uint8\_t dat);}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{207 uint8\_t \mbox{\hyperlink{main_8hpp_a945deb388e5928de12dd7f6c2181b93a}{rx}}(\textcolor{keywordtype}{bool} ack);}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{216 uint8\_t \mbox{\hyperlink{main_8hpp_aa6db46255cb370c4b02a204daefb40c2}{readRegister}}(uint8\_t reg);}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{224 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_ad8ba71135cb5de6780571d5711816763}{writeRegister}}(uint8\_t reg, uint8\_t value);}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{233 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_af3a3ef29e3e54bf2d1f3cd58a28db141}{testI2C\_read}}();}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{238 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_ab0ec380bbe8e09a3fd0b30c626735211}{MMA8653FC\_init}}();}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{243 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a7d6f235ac035b0e4642ed46e27e70b58}{MMA8653FC\_deInit}}();}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{258 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_ae2a0877a530ab4eead989e572435144e}{getAcceleration}}(int16\_t* x, int16\_t* y, int16\_t* z);}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{265 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a9920ab102e90b7f53bfde9446b7c60c2}{dynamicDelay}}(uint16\_t ms);}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{291 \textcolor{keywordtype}{float} \mbox{\hyperlink{main_8hpp_aaecc05df0106098c3f4b8628eaf8c180}{getAngle}}(\textcolor{keywordtype}{float} axis, \textcolor{keywordtype}{float} reference);}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{299 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_a88d02ddcf1143a629d01408b9af83fe7}{getRollNick}}(\textcolor{keywordtype}{float}* roll, \textcolor{keywordtype}{float}* nick);}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{307 int16\_t \mbox{\hyperlink{main_8hpp_af3248e2729810c7e31ce761d16f34e0f}{getGradient}}(int16\_t baseValue);}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{316 \textcolor{keywordtype}{bool} \mbox{\hyperlink{main_8hpp_a04cb44f56b022b414f1c79a12aa04593}{motionDetected}}(uint8\_t threshold);}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{328 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_afc89088f52dd8ba8b6cf388b8b08dfbe}{spritLevel}}();}
+\DoxyCodeLine{329 }
+\DoxyCodeLine{338 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_af7eb3c763899937d00b615725c044482}{dice}}();}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{352 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_ad4a7316a51b17d0f691bb3e33b95a5ad}{calibrate}}();}
+\DoxyCodeLine{353 }
+\DoxyCodeLine{358 \textcolor{keywordtype}{void} \mbox{\hyperlink{main_8hpp_ae2da94e03570cd696d5e1ef31169b6f3}{goToSleep}}();}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{371 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* MAIN\_HPP */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}
