@@ -62,7 +62,7 @@
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory "")
+      (outputdirectory "Gerber/Rev26.09.22/")
     )
   )
 
@@ -816,7 +816,7 @@
     (fp_arc (start 0.95 2.9) (mid 1.466219 3.062763) (end 1.795723 3.492182) (layer "F.Fab") (width 0.1) (tstamp 48f827a8-6e22-4a2e-abdc-c2a03098d883))
     (fp_arc (start 5.18 -1.3) (mid 16.5 -10.02) (end 25.22 1.3) (layer "F.Fab") (width 0.1) (tstamp 67621f9e-0a6a-4778-ad69-04dcf300659c))
     (fp_arc (start 21.531551 -0.203631) (mid 15.954687 6.28971) (end 9 1.3) (layer "F.Fab") (width 0.1) (tstamp 712d6a7d-2b62-464f-b745-fd2a6b0187f6))
-    (fp_arc (start 29.049508 -0.033425) (mid 16.980951 13.73456) (end 1.8 3.5) (layer "F.Fab") (width 0.1) (tstamp a03e565f-d8cd-4032-aae3-b7327d4143dd))
+    (fp_arc (start 29.049508 -0.033425) (mid 16.98095 13.73456) (end 1.8 3.5) (layer "F.Fab") (width 0.1) (tstamp a03e565f-d8cd-4032-aae3-b7327d4143dd))
     (fp_arc (start 25.22 -1.3) (mid 16.5 10.02) (end 5.18 1.3) (layer "F.Fab") (width 0.1) (tstamp b3d08afa-f296-4e3b-8825-73b6331d35bf))
     (fp_arc (start 13.3 -1.3) (mid 15.963947 -2.171724) (end 17.495448 0.175833) (layer "F.Fab") (width 0.1) (tstamp c801d42e-dd94-493e-bd2f-6c3ddad43f55))
     (fp_arc (start 1.8 -3.5) (mid 16.980951 -13.734563) (end 29.049508 0.033425) (layer "F.Fab") (width 0.1) (tstamp cef6f603-8a0b-4dd0-af99-ebfbef7d1b4b))
