@@ -3,13 +3,21 @@
         {
             "name": "AVR",
             "intelliSenseMode": "${default}",
-            "cStandard": "c11",
-            "cppStandard": "c++14",
+            "cStandard": "${default}",
+            "cppStandard": "${default}",
             "compilerPath": "/Users/FabianFranz/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-c++",
             "includePath": [
                 "/Users/FabianFranz/Development/Projects/AVRCubeRev3/AVR_USI_I2C_Lib-master/**"
             ],
             "compilerArgs": [
+                "-g",
+                "-Os",
+                "-Wall",
+                "-Wextra",
+                "-fpermissive",
+                "-fno-exceptions",
+                "-fno-threadsafe-statics",
+                "-pipe",
                 "-mmcu=attiny84",
                 "-DF_CPU=8000000UL"
             ],
