@@ -1,1 +1,33 @@
-Bills
+# PlatformIO / build
+.pio/
+*.elf
+*.hex
+*.lst
+*.o
+*.d
+
+# Editor / machine-specific
+.vscode/
+*.code-workspace
+.DS_Store
+
+# Doxygen output (regenerate with `doxygen Doxygen/Doxyfile` in AvrCubeV2Code/)
+AvrCubeV2Code/Doxygen/Output/
+
+# KiCad backups and caches
+*-bak
+*.kicad_pcb-bak
+*.sch-bak
+*-backups/
+fp-info-cache
+_autosave-*
+*.kicad_prl
+
+# Archives that duplicate unpacked directories
+*.zip
+*.7z
+
+# Keys — never commit
+id_*
+*.pem
+gitkey*

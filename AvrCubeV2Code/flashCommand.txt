@@ -1,5 +1,9 @@
-Attiny24:
-avrdude -p t24 -c avrisp -b 19200 -P /dev/cu.usbserial-1410 -U /Users/FabianFranz/Development/Projects/AVRCubeRev2/AvrCubeV2Code/.pio/build/attiny24/firmware.hex -U lfuse:w:0xe2:m -U hfuse:w:0xdf:m -U efuse:w:0xff:m
+# Run from AvrCubeV2Code/ after `pio run -e attiny24` (or -e attiny84).
+# Programmer: Arduino running ArduinoISP (avrisp @ 19200). Adjust -P to your port.
+# Fuses: lfuse 0xE2 = internal 8 MHz RC, CKDIV8 off; hfuse 0xDF keeps RESET enabled.
 
-Attiny84:
-avrdude -p t84 -c avrisp -b 19200 -P /dev/cu.usbserial-1410 -U /Users/FabianFranz/Development/Projects/AVRCubeRev2/AvrCubeV2Code/.pio/build/attiny84/firmware.hex -U lfuse:w:0xe2:m -U hfuse:w:0xdf:m -U efuse:w:0xff:m
+ATtiny24:
+avrdude -p t24 -c avrisp -b 19200 -P /dev/ttyUSB0 -U flash:w:.pio/build/attiny24/firmware.hex -U lfuse:w:0xe2:m -U hfuse:w:0xdf:m -U efuse:w:0xff:m
+
+ATtiny84:
+avrdude -p t84 -c avrisp -b 19200 -P /dev/ttyUSB0 -U flash:w:.pio/build/attiny84/firmware.hex -U lfuse:w:0xe2:m -U hfuse:w:0xdf:m -U efuse:w:0xff:m
